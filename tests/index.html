@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      html, body, #root {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #canvas-holder {
+            flex: 1;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+              .options {
+            display: flex;
+            flex-direction: row;
+            height: 50px;
+            width: 100%;
+        }
+
+        .options > select {
+            width: 33%;
+        }
+    </style>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,user-scalable=no,minimal-ui"
+    />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+
+  <body>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
+    <div id="root"></div>
+  </body>
+</html>
