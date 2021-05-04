@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.3] - 2021-05-04
+### Fixed
+ - GitHub badge line-break in `README.md`
+ - Issue where camera source could not be a string.
+
+
+### Changed
+ - Minor ESLint formatting changes in tests.
+### Added
+ - `onFirstFrame` callback prop to `ZapparCamera` component. This gets called when the first camera frame is processed.
+ - `First Frame` section to `README.MD`
+
 
 ## [1.0.2] - 2021-04-09
 - Open-sourced on GitHub.

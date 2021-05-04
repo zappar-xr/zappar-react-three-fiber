@@ -1,7 +1,7 @@
 /* eslint-disable import/no-webpack-loader-syntax */
 /* eslint-disable global-require */
 /* eslint-disable import/no-unresolved */
-import React, { Suspense, useEffect, useRef } from "react";
+import React, { Suspense, useRef } from "react";
 import { render } from "react-dom";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
@@ -15,17 +15,17 @@ const FaceMeshMaterial = () => {
 
 const App = () => {
   const faceTrackerGroup = useRef<Types.FaceAnchorGroup>();
-  useEffect(() => {
-    setTimeout(() => {
-      console.log(faceTrackerGroup?.current?.position);
-    }, 1000);
-  }, [faceTrackerGroup]);
-
   return (
     <>
       <BrowserCompatibility fallback={<div>Sorry!</div>} />
       <ZapparCanvas>
         <ZapparCamera
+          onUpdate={() => {
+            console.log("update");
+          }}
+          onFirstFrame={() => {
+            console.log("first");
+          }}
           // makeDefault={false}
           // renderPriority={0}
           sources={{

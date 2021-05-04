@@ -9,9 +9,7 @@ import { FaceTracker, HeadMaskMesh, ZapparCamera, ZapparCanvas, Loader } from ".
 
 function Model() {
   const [gltf, set] = useState<any>();
-  useMemo(() => new GLTFLoader().load(require("file-loader!./assets/z_helmet.glb").default, set), [
-    require("file-loader!./assets/z_helmet.glb").default,
-  ]);
+  useMemo(() => new GLTFLoader().load(require("file-loader!./assets/z_helmet.glb").default, set), [require("file-loader!./assets/z_helmet.glb").default]);
 
   if (gltf) {
     const { scene } = gltf;
@@ -22,9 +20,7 @@ function Model() {
 }
 function Model2() {
   const [gltf, set] = useState<any>();
-  useMemo(() => new GLTFLoader().load(require("file-loader!./assets/z_helmet.glb").default, set), [
-    require("file-loader!./assets/z_helmet.glb").default,
-  ]);
+  useMemo(() => new GLTFLoader().load(require("file-loader!./assets/z_helmet.glb").default, set), [require("file-loader!./assets/z_helmet.glb").default]);
 
   if (gltf) {
     const { scene } = gltf;

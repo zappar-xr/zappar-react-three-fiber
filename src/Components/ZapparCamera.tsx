@@ -24,9 +24,13 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
     makeDefault = true,
     renderPriority = 1,
     permissionRequest = true,
+    onFirstFrame,
   } = props;
 
   const { gl, scene, set } = useThree((state) => state);
+
+  const [hadFirstFrame, setHadFirstFrame] = useState(false);
+
   const cameraRef = React.useRef<ZapparCameraAdditional>();
 
   const [permissionGranted, setPermissionGranted] = useState<boolean>(false);
@@ -106,6 +110,12 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
 
   useFrame(({ gl, scene }) => {
     if (!cameraRef.current) return;
+
+    if (onFirstFrame && !hadFirstFrame && cameraRef.current.pipeline.frameNumber() > 0) {
+      setHadFirstFrame(true);
+      onFirstFrame();
+    }
+
     cameraRef.current.updateFrame(gl);
     gl.render(scene, cameraRef.current);
   }, renderPriority);

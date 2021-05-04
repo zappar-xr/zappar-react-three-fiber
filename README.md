@@ -43,6 +43,7 @@ You may also be interested in:
       * [Setting up the Camera](#setting-up-the-camera)
       * [Advanced Usage](#advanced-usage)
          * [Custom Video Device](#custom-video-device)
+         * [First Frame](#first-frame)
          * [Setting the default camera](#setting-the-default-camera)
          * [User Facing Camera](#user-facing-camera)
          * [Mirroring the Camera](#mirroring-the-camera)
@@ -62,7 +63,7 @@ You may also be interested in:
       * [Usage with react-router-dom](#usage-with-react-router-dom)
       * [Integrating into an existing create-react-app project](#integrating-into-an-existing-create-react-app-project)
 
-<!-- Added by: zapparadmin, at: Fri Apr  9 17:56:26 BST 2021 -->
+<!-- Added by: zapparadmin, at: Tue May  4 16:28:41 BST 2021 -->
 
 <!--te-->
 
@@ -330,6 +331,18 @@ Custom video device IDs can be provided as options passed into `ZapparCamera` co
 />
 ```
 
+
+### First Frame
+
+Use `onFirstFrame` callback prop to detect when the first frame has been processed:
+
+```tsx
+ <ZapparCamera
+  onFirstFrame={() => {
+    console.log("first frame");
+  }}
+/>
+```
 ### Setting the default camera
 
 When the camera component is mounted, it sets itself as the scene's main camera with render priority of 1. You may change this behavior with the following props:

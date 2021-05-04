@@ -48,7 +48,8 @@ declare global {
 
 export namespace Props {
   type placementUIType =  "toggle" | "placement-only";
-  type VideoSource = {rearCamera? : HTMLVideoElement | HTMLImageElement, userCamera? : HTMLVideoElement | HTMLImageElement };
+  type Source = HTMLVideoElement | HTMLImageElement | string;
+  type VideoSource = {rearCamera? : Source, userCamera? : Source};
 
   export type Camera = JSX.IntrinsicElements["zapparCameraAdditional"] & {
     userCameraMirrorMode?: MirrorMode;
@@ -61,6 +62,7 @@ export namespace Props {
     makeDefault?: boolean;
     renderPriority?: number;
     permissionRequest?: boolean;
+    onFirstFrame? : () => void;
   };
 
   export type ImageTrackerGroup = JSX.IntrinsicElements["imageAnchorGroup"] & {
