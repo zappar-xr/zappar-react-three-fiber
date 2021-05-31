@@ -293,20 +293,6 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.37.tgz#a3dd8da4eb84a996c36e331df98d82abd76b516e"
   integrity sha512-XYmBiy+ohOR4Lh5jE379fV2IU+6Jn4g5qASinhitfyO71b/sCo6MKsMLF5tc7Zf2CE8hViVQyYSobJNke8OvUw==
 
-"@types/pixelmatch@^5.2.2":
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/@types/pixelmatch/-/pixelmatch-5.2.3.tgz#aefcbfa7fb2861727af0ab7c097be7383bd584dd"
-  integrity sha512-p+nAQVYK/DUx7+s1Xyu9dqAg0gobf7VmJ+iDA4lljg1o4XRgQHr7R2h1NwFt3gdNOZiftxWB11+0TuZqXYf19w==
-  dependencies:
-    "@types/node" "*"
-
-"@types/pngjs@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@types/pngjs/-/pngjs-6.0.0.tgz#d5372348793a383eb2220e43b661af61daf364b8"
-  integrity sha512-PyZJHtd/mGA9a+cb3RQvd2pj56OIoo522sEhGZvq9THfBv5skyPRo50o3Hvy+n6U0u8RWteMHhlvLfN4FOZTaA==
-  dependencies:
-    "@types/node" "*"
-
 "@types/prop-types@*":
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
@@ -604,6 +590,14 @@
   dependencies:
     is-mobile "^3.0.0"
     qrcode-svg "^1.1.0"
+
+"@zappar/test-utils@0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@zappar/test-utils/-/test-utils-0.0.3.tgz#73d003b9766616e9aba557f0e46ed59d724bcc25"
+  integrity sha512-JR44Jk8nDr5qRH/GaxLqGPKAdnG/LPYS0EQgj3JUzw9EJ0CnfsjTh7tABqBUN0zzIfaG4VhDOJTCEOG7m626uA==
+  dependencies:
+    pixelmatch "^5.2.1"
+    pngjs "^6.0.0"
 
 "@zappar/zappar-cv@^0.3.8":
   version "0.3.8"
@@ -7436,9 +7430,9 @@ typedarray@^0.0.6:
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
 typescript@^4.2.3:
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.2.3.tgz#39062d8019912d43726298f09493d598048c1ce3"
-  integrity sha512-qOcYwxaByStAWrBf4x0fibwZvMRG+r4cQoTjbPtUlrWjBHbmCAww1i448U0GJ+3cNNEtebDteo/cHOR3xJ4wEw==
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.2.tgz#399ab18aac45802d6f2498de5054fcbbe716a805"
+  integrity sha512-zZ4hShnmnoVnAHpVHWpTcxdv7dWP60S2FsydQLV8V5PbS3FifjWFFRiHSWpDJahly88PRyV5teTSLoq4eG7mKw==
 
 ua-parser-js@^0.7.21:
   version "0.7.26"
