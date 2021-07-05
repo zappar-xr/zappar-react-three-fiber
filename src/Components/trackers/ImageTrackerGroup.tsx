@@ -7,6 +7,11 @@ import useStore from "../../store";
 
 const { ImageAnchorGroup } = ZapparThree;
 extend({ ImageAnchorGroup });
+
+/**
+ * A THREE.Group that attaches content to a known image as it moves around in the camera view.
+ * @see https://docs.zap.works/universal-ar/web-libraries/react-threejs/image-tracking/
+ */
 const ZapparImageTracker = forwardRef((props: Props.ImageTrackerGroup, ref) => {
   const { useImageTracker, onNotVisible, onNewAnchor, onVisible, targetImage, camera, children, pipeline } = props;
   const imageTrackerGroupRef = useRef();

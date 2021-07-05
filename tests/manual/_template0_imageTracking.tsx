@@ -3,11 +3,11 @@
 /* eslint-disable import/no-unresolved */
 import React, { useRef } from "react";
 import { render } from "react-dom";
-import { ImageTracker, ZapparCamera, ZapparCanvas } from "../src/index";
+import { ImageTracker, ZapparCamera, ZapparCanvas } from "../../src/index";
 
 export default function App() {
   const zapparCamera = useRef();
-  const targetFile = require("file-loader!./assets/example-tracking-image.zpt").default;
+  const targetFile = require("file-loader!../assets/example-tracking-image.zpt").default;
 
   return (
     <ZapparCanvas>

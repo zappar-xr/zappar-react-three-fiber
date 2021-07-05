@@ -7,6 +7,10 @@ import { Props } from "../spec";
 const { FaceBufferGeometry } = ZapparThree;
 extend({ FaceBufferGeometry });
 
+/**
+ * A THREE.BufferGeometry that fits to the user's face and deforms as the user's expression changes.
+ * @see https://docs.zap.works/universal-ar/web-libraries/react-threejs/face-tracking/
+ */
 const ZapparFaceBufferGeometry = forwardRef((props: Props.FaceBufferGeometry, ref) => {
   const { fillMouth = false, fillEyeLeft = false, fillEyeRight = false, fillNeck = false, fullHead = false, children, trackerGroup } = props;
 

@@ -7,3 +7,4 @@ test-dist
 umd
 lib
 package-lock.json
+docs

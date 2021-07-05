@@ -16,7 +16,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ["react", "@typescript-eslint", "eslint-plugin-tsdoc"],
   rules: {
     indent: "off",
     "eol-last": 0,

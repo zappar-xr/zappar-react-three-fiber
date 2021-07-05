@@ -3,6 +3,11 @@ import * as ZapparThree from "@zappar/zappar-threejs";
 import { useEffect, useState } from "react";
 import { Props } from "../../spec";
 
+/**
+ * Shows a full-page dialog that informs the user they're using an unsupported browser,
+ * and provides a button to 'copy' the current page URL so they can 'paste' it into the
+ * address bar of a compatible alternative.
+ */
 const compatibility = (props: Props.browserCompatibility) => {
   const { fallback } = props;
 

@@ -1,5 +1,6 @@
 import VERSION from "./version";
 
+// eslint-disable-next-line no-console
 console.log(`Zappar for React Three v${VERSION}`);
 
 export { browserIncompatible, Pipeline, LogLevel, setLogLevel } from "@zappar/zappar-threejs";

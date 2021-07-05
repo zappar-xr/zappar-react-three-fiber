@@ -17,7 +17,8 @@
     ],
     "strict": true,
     "jsx": "react",
+    "types": [ "@types/three", "jest", "puppeteer", "ts-jest", "jest-environment-puppeteer"]
   },
-  "include": ["src", ],
+  "include": ["src", "tests"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }

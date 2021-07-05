@@ -12,6 +12,11 @@ class ZapparCameraAdditional extends ZapparThree.Camera {
 // Zappar camera does not have this method, so we create a noop
 extend({ ZapparCameraAdditional });
 
+/**
+ * Creates a camera that you can use instead of a perspective camera.
+ *
+ * @see https://docs.zap.works/universal-ar/web-libraries/react-threejs/camera-setup/
+ */
 const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
   const {
     userFacing = false,
@@ -25,6 +30,8 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
     renderPriority = 1,
     permissionRequest = true,
     onFirstFrame,
+    environmentMap,
+    useEnvironmentMap,
   } = props;
 
   const { gl, scene, set } = useThree((state) => state);
@@ -32,6 +39,8 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
   const [hadFirstFrame, setHadFirstFrame] = useState(false);
 
   const cameraRef = React.useRef<ZapparCameraAdditional>();
+
+  const [envMap, setEnvMap] = useState<ZapparThree.CameraEnvironmentMap>();
 
   const [permissionGranted, setPermissionGranted] = useState<boolean>(false);
   const store = {
@@ -51,6 +60,15 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
       set(() => ({ camera: cameraRef.current as any }));
     }
   }, [makeDefault]);
+
+  useEffect(() => {
+    if (environmentMap || useEnvironmentMap) {
+      const envMap = new ZapparThree.CameraEnvironmentMap();
+      if (environmentMap) scene.environment = envMap.environmentMap;
+      useEnvironmentMap?.(envMap.environmentMap); // Overlap with THREE.texture
+      setEnvMap(envMap);
+    }
+  }, [environmentMap]);
 
   useEffect(() => {
     if (!cameraRef.current) return;
@@ -117,6 +135,9 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
     }
 
     cameraRef.current.updateFrame(gl);
+
+    envMap?.update(gl, cameraRef.current);
+
     gl.render(scene, cameraRef.current);
   }, renderPriority);
 

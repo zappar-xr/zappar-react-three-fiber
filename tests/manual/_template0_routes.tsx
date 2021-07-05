@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import * as ZapparThree from "@zappar/zappar-threejs";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-import { FaceTracker, ZapparCamera, ZapparCanvas, HeadMaskMesh, Loader } from "../src/index";
+import { FaceTracker, ZapparCamera, ZapparCanvas, HeadMaskMesh, Loader } from "../../src/index";
 
 function App() {
   return (
@@ -44,7 +44,7 @@ function Home() {
 
 function Model() {
   const [gltf, set] = useState<GLTF>();
-  const url = require("file-loader!./assets/z_helmet.glb").default;
+  const url = require("file-loader!../assets/z_helmet.glb").default;
   useMemo(() => new GLTFLoader().load(url, set), [url]);
 
   if (gltf) {

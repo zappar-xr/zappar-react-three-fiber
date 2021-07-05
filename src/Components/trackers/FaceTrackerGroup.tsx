@@ -8,6 +8,10 @@ import useStore from "../../store";
 const { FaceAnchorGroup } = ZapparThree;
 extend({ FaceAnchorGroup });
 
+/**
+ * A THREE.Group which attaches content to a face as it moves around in the camera view.
+ * @see https://docs.zap.works/universal-ar/web-libraries/react-threejs/face-tracking/
+ */
 const ZapparFaceAnchorGroup = forwardRef((props: Props.FaceTrackerAnchorGroup, ref) => {
   const { camera, children, useFaceTracker, onNotVisible, onVisible, onNewAnchor, pipeline, model } = props;
 

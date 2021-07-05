@@ -6,12 +6,12 @@ import { render } from "react-dom";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import * as ZapparThree from "@zappar/zappar-threejs";
-import { FaceTracker, ZapparCamera, ZapparCanvas, BrowserCompatibility } from "../src/index";
+import { FaceTracker, ZapparCamera, ZapparCanvas, BrowserCompatibility } from "../../src/index";
 
 function Plane(props: { type: "camera" | "scene" | "target"; poseMode?: string }): JSX.Element {
   const { type, poseMode } = props;
 
-  const planeTextureSrc: string = require(`file-loader!./assets/planes/${type}.jpg`).default;
+  const planeTextureSrc: string = require(`file-loader!../assets/planes/${type}.jpg`).default;
   const planeTexture = useLoader(TextureLoader, planeTextureSrc);
   const [position, setPosition] = useState<[number, number, number]>([0, 0, 0]);
 
@@ -79,8 +79,8 @@ export default function App() {
         <select
           id="cameraSelect"
           value={cameraOption}
-          onChange={(e) => setCameraOption((e.target.value as unknown) as any)}
-          onBlur={(e) => setCameraOption((e.target.value as unknown) as any)}
+          onChange={(e) => setCameraOption(e.target.value as unknown as any)}
+          onBlur={(e) => setCameraOption(e.target.value as unknown as any)}
         >
           <option value="default">Default Camera</option>
           <option value="userFacing">Use Facing Camera</option>
@@ -88,8 +88,8 @@ export default function App() {
         <select
           id="poseSelect"
           value={cameraPose}
-          onChange={(e) => setCameraPose((e.target.value as unknown) as any)}
-          onBlur={(e) => setCameraPose((e.target.value as unknown) as any)}
+          onChange={(e) => setCameraPose(e.target.value as unknown as any)}
+          onBlur={(e) => setCameraPose(e.target.value as unknown as any)}
         >
           <option value="default">Camera Pose Default</option>
           <option value="attitude">Camera Pose With Device Attitude</option>
@@ -97,8 +97,8 @@ export default function App() {
         </select>
         <select
           id="mirrorSelect"
-          onChange={(e) => setMirror((e.target.value as unknown) as any)}
-          onBlur={(e) => setMirror((e.target.value as unknown) as any)}
+          onChange={(e) => setMirror(e.target.value as unknown as any)}
+          onBlur={(e) => setMirror(e.target.value as unknown as any)}
         >
           <option value="none">No Mirror</option>
           <option value="poses">Mirror Poses</option>

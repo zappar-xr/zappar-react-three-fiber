@@ -11,6 +11,10 @@ import PlacementUI from "../util/PlacementUI";
 const { InstantWorldAnchorGroup } = ZapparThree;
 extend({ InstantWorldAnchorGroup });
 
+/**
+ * A THREE.Group which attaches content to a point on a surface in front of the user as it moves around in the camera view.
+ * @see https://docs.zap.works/universal-ar/web-libraries/react-threejs/instant-world-tracking/
+ */
 const ZapparInstantTracker = forwardRef((props: Props.InstantWorldAnchorGroup, ref) => {
   const { camera, placementMode, children, placementCameraOffset, pipeline, placementUI } = props;
   const InstantTrackerGroupRef = useRef();

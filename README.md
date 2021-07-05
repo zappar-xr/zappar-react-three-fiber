@@ -1,25 +1,23 @@
 # Zappar for React Three Fiber
 
-
-
 ![Build](https://github.com/zappar-xr/zappar-react-three-fiber/workflows/Build/badge.svg)
 
 This library allows you use Zappar's best-in-class AR technology with content built using the 3D rendering platform React Three Fiber.
 
 It provides high performance (30 frames-per-second) face, image and world tracking, in the browsers already installed on your users' mobile phones.
 
-
-<!-- <img src="preview/preview.gif" width="450"/>k -->
+<img src="preview/preview.gif" width="450"/>k
 
 You may also be interested in:
- - Zappar for A-Frame ([website](https://zap.works/universal-ar/aframe/), [NPM](https://www.npmjs.com/package/@zappar/zappar-aframe))
- - Zappar for ThreeJS ([website](https://zap.works/universal-ar/threejs/), [NPM](https://www.npmjs.com/package/@zappar/zappar-threejs))
- - Zappar for Unity ([website](https://zap.works/universal-ar/unity/))
- - Zappar for JavaScript ([website](https://zap.works/universal-ar/aframe/), [NPM](https://www.npmjs.com/package/@zappar/zappar)), if you'd like to build content with a different 3D rendering platform
- - ZapWorks Studio ([website](https://zap.works/studio/)), a full 3D development environment built for AR, VR and MR
 
+- Zappar for A-Frame ([website](https://zap.works/universal-ar/aframe/), [NPM](https://www.npmjs.com/package/@zappar/zappar-aframe))
+- Zappar for ThreeJS ([website](https://zap.works/universal-ar/threejs/), [NPM](https://www.npmjs.com/package/@zappar/zappar-threejs))
+- Zappar for Unity ([website](https://zap.works/universal-ar/unity/))
+- Zappar for JavaScript ([website](https://zap.works/universal-ar/aframe/), [NPM](https://www.npmjs.com/package/@zappar/zappar)), if you'd like to build content with a different 3D rendering platform
+- ZapWorks Studio ([website](https://zap.works/studio/)), a full 3D development environment built for AR, VR and MR
 
 ## Table Of Contents
+
 <details>
 <summary>Click to expand table of contents</summary>
 
@@ -47,6 +45,7 @@ You may also be interested in:
          * [Setting the default camera](#setting-the-default-camera)
          * [User Facing Camera](#user-facing-camera)
          * [Mirroring the Camera](#mirroring-the-camera)
+         * [Realtime Camera-based Reflections](#realtime-camera-based-reflections)
          * [Camera Pose](#camera-pose)
       * [Tracking](#tracking)
          * [Image Tracking](#image-tracking)
@@ -62,13 +61,13 @@ You may also be interested in:
       * [Loading UI](#loading-ui)
       * [Usage with react-router-dom](#usage-with-react-router-dom)
       * [Integrating into an existing create-react-app project](#integrating-into-an-existing-create-react-app-project)
+      * [Links and Resources](#links-and-resources)
 
-<!-- Added by: zapparadmin, at: Tue May  4 16:28:41 BST 2021 -->
+<!-- Added by: zapparadmin, at: Mon Jul  5 16:10:44 BST 2021 -->
 
 <!--te-->
 
 </details>
-
 
 ## Getting Started
 
@@ -82,26 +81,27 @@ Check out these repositories that contain `webpack` and `babel` setups, which ar
 
  Tracking Type | JavaScript | TypeScript
 --- | --- | ---
-Image Tracking   | [GitHub (JSX) ](https://github.com/zappar-xr/zappar-react-three-fiber-image-tracking-webpack-bootstrap)   | [GitHub (TSX)](https://github.com/zappar-xr/zappar-react-three-fiber-image-tracking-webpack-bootstrap-typescript)
-Face Tracking    | [GitHub (JSX) ](https://github.com/zappar-xr/zappar-react-three-fiber-face-tracking-webpack-bootstrap)    | [GitHub (TSX)](https://github.com/zappar-xr/zappar-react-three-fiber-face-tracking-webpack-bootstrap-typescript)
-Instant Tracking | [GitHub (JSX) ](https://github.com/zappar-xr/zappar-react-three-fiber-instant-tracking-webpack-bootstrap) | [GitHub (TSX)](https://github.com/zappar-xr/zappar-react-three-fiber-instant-tracking-webpack-bootstrap-typescript)
+Image Tracking   | [GitHub (JSX)](https://github.com/zappar-xr/zappar-react-three-fiber-image-tracking-webpack-bootstrap)   | [GitHub (TSX)](https://github.com/zappar-xr/zappar-react-three-fiber-image-tracking-webpack-bootstrap-typescript)
+Face Tracking    | [GitHub (JSX)](https://github.com/zappar-xr/zappar-react-three-fiber-face-tracking-webpack-bootstrap)    | [GitHub (TSX)](https://github.com/zappar-xr/zappar-react-three-fiber-face-tracking-webpack-bootstrap-typescript)
+Instant Tracking | [GitHub (JSX)](https://github.com/zappar-xr/zappar-react-three-fiber-instant-tracking-webpack-bootstrap) | [GitHub (TSX)](https://github.com/zappar-xr/zappar-react-three-fiber-instant-tracking-webpack-bootstrap-typescript)
 
 #### create-react-app
 
 Alternatively,you may get started via `npx create-react-app`:
+
 ```bash
-$ npx create-react-app uar-app --template @zappar/r3f-face-tracking-typescript
+npx create-react-app uar-app --template @zappar/r3f-face-tracking-typescript
 ```
 
 <details>
   <summary>Click to expand available templates</summary>
 
-* `@zappar/r3f-face-tracking`
-* `@zappar/r3f-face-tracking-typescript`
-* `@zappar/r3f-image-tracking`
-* `@zappar/r3f-image-tracking-typescript`
-* `@zappar/r3f-instant-tracking`
-* `@zappar/r3f-instant-tracking-typescript`
+- `@zappar/r3f-face-tracking`
+- `@zappar/r3f-face-tracking-typescript`
+- `@zappar/r3f-image-tracking`
+- `@zappar/r3f-image-tracking-typescript`
+- `@zappar/r3f-instant-tracking`
+- `@zappar/r3f-instant-tracking-typescript`
 
 </details>
 
@@ -118,7 +118,7 @@ You can use this library by installing from NPM for use in a webpack project.
 Run the following NPM command inside your project directory:
 
 ```bash
-$ npm install --save @zappar/zappar-react-three-fiber
+npm install --save @zappar/zappar-react-three-fiber
 ```
 
 Then import the library into your JavaScript or TypeScript files:
@@ -194,41 +194,47 @@ Due to browser restrictions surrounding use of the camera, you must use HTTPS to
 Alternatively you can use the [ZapWorks command-line tool](https://www.npmjs.com/package/@zappar/zapworks-cli) to serve a folder over HTTPS for access on your local computer, like this:
 
 ```bash
-$ zapworks serve .
+zapworks serve .
 ```
 
 The command also lets you serve the folder for access by other devices on your local network, like this:
 
 ```bash
-$ zapworks serve . --lan
+zapworks serve . --lan
 ```
-
 
 ## Compatibility and Browser Support
 
 This library works well on the browsers that enjoy the vast majority of mobile market-share. That said, there are a number of web browsers available across the mobile and desktop device landscape.
 
 *Best support:*
- - Safari for iOS (version 11.3 and later)
- - Chrome for Android (versions from at least the last year)
+
+- Safari for iOS (version 11.3 and later)
+- Chrome for Android (versions from at least the last year)
 
 *Functional but not our primary support target (support quality):*
- - Most Webkit/Blink-based web browsers for Android, including Brave (good)
- - iOS in-app web views implemented with SFSafariViewController (good)
- - Firefox for Android (good, however performance may be lower than other browsers)
- - Chrome for Mac/Windows (*)
- - Firefox for Mac/Windows (*)
- - Safari for Mac (*)
+
+- Most Webkit/Blink-based web browsers for Android, including Brave (good)
+- Most third-party web browsers for iOS from iOS 14.3 and later (good)
+- iOS in-app web views implemented with SFSafariViewController (good)
+- iOS in-app web views implemented with WKWebView from iOS 14.3 (good)
+- Firefox for Android (good, however performance may be lower than other browsers)
+- Chrome for Mac/Windows (*)
+- Firefox for Mac/Windows (*)
+- Safari for Mac (*)
 
 *Known to not work:*
- - iOS in-app web views implemented with WKWebView or UIWebView - these iOS technologies do not support camera access at all and thus we're unable to support them. We hope that Apple will rectify this issue in a future iOS release.
- - Non-Safari web browsers on iOS, including Chrome, Firefox and Brave - these browsers use WKWebView due to App Store restrictions and thus do not support camera access.
+
+- iOS in-app web views implemented with WKWebView prior to iOS 14.3 - this iOS technology do not support camera access at all and thus we’re unable to support it. Apple has rectified this issue in iOS 14.3.
+- iOS in-app web views implemented with the deprecated UIWebView component - this iOS technology do not support camera access at all and thus we’re unable to support it.
+- Non-Safari web browsers on iOS, including Chrome, Firefox and Brave, before iOS 14.3 - these browsers use WKWebView due to App Store restrictions and thus do not support camera access.
 
 \* Browsers without motion sensor access (e.g desktop browsers) don't support instant world tracking or attitude-based camera poses.
 
 ### Detecting Browser Compatibility
 
 To make it easy to detect if your page is running in a browser that's not supported, we've provided the `BrowserCompatibility` component.
+
 ```tsx
 <>
    <BrowserCompatibility />
@@ -246,8 +252,8 @@ You may also provide a custom fallback (`ReactElement`) UI to be displayed.
 <BrowserCompatibility fallback={<div>Sorry!</div>} />
 ```
 
-
 For more custom implementations, consider using `browserIncompatible` function.
+
 ```tsx
 const incompatible = browserIncompatible(); // true / false
 ```
@@ -261,7 +267,7 @@ Once you've built your site, you have a number of options for hosting it. These 
 This wrapper library is MIT licensed, but relies on our proprietary computer vision library, @zappar/zappar-cv, for which you must maintain an activate subscription at ZapWorks. To learn more about licensing, [click here](https://docs.zap.works/universal-ar/licensing/).
 
 The source code for this wrapper library is available freely for your viewing pleasure over at GitHub:
-https://github.com/zappar-xr/zappar-react-three-fiber/
+<https://github.com/zappar-xr/zappar-react-three-fiber/>
 
 ## Setting up the Canvas
 
@@ -276,16 +282,17 @@ import { ZapparCanvas /* ... */ } from "@zappar/zappar-react-three-fiber";
 ```
 
 You may alternatively use the default react-three-fiber `Canvas` component, with `colorManagement` toggled off.
+
 ```tsx
 <Canvas colorManagement={false}>{/** YOUR CONTENT HERE **/}</Canvas>;
 ```
-
 
 When using [@zappar/webgl-snapshot](https://www.npmjs.com/package/@zappar/webgl-snapshot) to take screenshots, construct the canvas with drawing buffer preservation enabled:
 
 ```tsx
 <ZapparCanvas gl={{ preserveDrawingBuffer: true }}>
 ```
+
 or
 
 ```tsx
@@ -294,7 +301,6 @@ or
   gl={{ preserveDrawingBuffer: true }
 >
 ```
-
 
 ## Setting up the Camera
 
@@ -312,14 +318,15 @@ return (
   </ZapparCanvas>
 );
 ```
-You don't need to change the position or rotation of the camera yourself - the Zappar library will do this for you, automatically.
 
+You don't need to change the position or rotation of the camera yourself - the Zappar library will do this for you, automatically.
 
 ## Advanced Usage
 
 ### Custom Video Device
 
 Custom video device IDs can be provided as options passed into `ZapparCamera` component:
+
 ```ts
 <ZapparCamera
   sources={{
@@ -330,7 +337,6 @@ Custom video device IDs can be provided as options passed into `ZapparCamera` co
   }}
 />
 ```
-
 
 ### First Frame
 
@@ -343,6 +349,7 @@ Use `onFirstFrame` callback prop to detect when the first frame has been process
   }}
 />
 ```
+
 ### Setting the default camera
 
 When the camera component is mounted, it sets itself as the scene's main camera with render priority of 1. You may change this behavior with the following props:
@@ -355,6 +362,7 @@ When the camera component is mounted, it sets itself as the scene's main camera 
 ```
 
 To set the camera as your main scene camera yourself, use `useThree`:
+
 ```tsx
 const set = useThree(state => state.set)
 const cameraRef = useRef()
@@ -368,7 +376,6 @@ useLayoutEffect(() => {
 <ZapparCamera makeDefault={false} ref={ref}/>
 // ...
 ```
-
 
 ### User Facing Camera
 
@@ -395,6 +402,34 @@ The values you can pass to `userCameraMirrorMode` are:
 - `none`: no mirroring of content or camera view is performed
 
 There's also a `rearCameraMirrorMode` prop that takes the same values should you want to mirror the rear-facing camera. The default `rearCameraMirrorMode` is `none`.
+
+### Realtime Camera-based Reflections
+
+The SDK provides an automatically generated environment map that's useful if you're using materials that support reflections (e.g. `MeshStandardMaterial`, `MeshPhysicalMaterial`). The map uses the camera feed to create an approximate environment that can add some realism to your scene.
+
+To apply the map to your scene, simply pass `environmentMap` prop to the `ZapparCamera` component:
+
+```tsx
+<ZapparCamera environmentMap />
+```
+
+Alternatively, you may get the texture to attach to specific object materials by passing in a callback function to `useEnvironmentMap`:
+
+```tsx
+const App = () => {
+  const [envMap, setEnvMap] = useState<THREE.Texture>();
+  return (
+    <ZapparCanvas>
+      <ZapparCamera useEnvironmentMap={setEnvMap} />
+      <mesh position={[0, 0, -5]}>
+        <sphereBufferGeometry />
+        <meshStandardMaterial metalness={1} roughness={0} envMap={envMap} />
+      </mesh>
+      <directionalLight position={[2.5, 8, 5]} intensity={1.5} />
+    </ZapparCanvas>
+  );
+};
+```
 
 ### Camera Pose
 
@@ -444,7 +479,7 @@ The group provides a coordinate system that has its origin at the center of the 
 `ImageTracker`s use a special 'target file' that's been generated from the source image you'd like to track. You can generate them using the [ZapWorks command-line utility](https://docs.zap.works/universal-ar/zapworks-cli/) like this:
 
 ```bash
-$ zapworks train myImage.png
+zapworks train myImage.png
 ```
 
 The resulting file can then be passed as a `targetFile` prop to be loaded:
@@ -622,7 +657,6 @@ To track content from a point on a surface in front of the user, use the `Instan
 
 The group provides a coordinate system that has its origin at the point that's been set, with the positive Y coordinate pointing up out of the surface, and the X and Z coordinates in the plane of the surface.
 
-
 You can use the `placementMode` prop to let the user choose a location for their content by moving their camera around the room. While the prop is set, the `InstantTracker`'s position will be updated every frame to be in front of the user at `[0, 0, -5]` relative to the camera. Once the prop is removed the tracker will keep the content anchored at that position in the user's environment, rather than directly in front of the camera. You can customize the camera-relative position that's set during placement mode using the `placementCameraOffset` prop.
 
 In typical usage, the tracker starts with `placementMode` set, and an on-screen UI element enables to the user to 'place' and 'pick-up' the content by toggling that prop, like this:
@@ -661,7 +695,6 @@ For your convenience, a default placement UI is available. This can be used by s
 
 A simple experience which uses `placementUI` may look like this:
 
-
 ```tsx
 export default function App() {
   return (
@@ -682,15 +715,10 @@ export default function App() {
 }
 ```
 
-
-
-
-
-
 ## Loading UI
 
-
 For your convenience, this package includes a `Loader` component that you can use to display a progress bar while your experience loads (should you wish to). It takes over the global instance of `THREE`'s `LoadingManager`. The `<Loader />` is used by adding it to the canvas like this:
+
 ```tsx
 import {Loader, /*...*/ } from '@zappar/zappar-react-three-fiber'
 // ....
@@ -710,7 +738,6 @@ return (
 ```
 
 The `Loader` will automatically handle the showing and hiding of the screen during the loading process.
-
 
 ## Usage with react-router-dom
 
@@ -738,13 +765,13 @@ const App = () => {
   );
 };
 ```
-*Note that removing and adding a canvas element is a relatively costly process which should be avoided, if possible.*
 
+*Note that removing and adding a canvas element is a relatively costly process which should be avoided, if possible.*
 
 ## Integrating into an existing create-react-app project
 
 You will need to add react-app-rewired to your project:
-https://github.com/timarney/react-app-rewired
+<https://github.com/timarney/react-app-rewired>
 
 Then create a `config-overrides.js` in the root of your project.
 
@@ -761,7 +788,8 @@ module.exports = {
               type: "javascript/auto",
               loader: "file-loader",
               options: {
-                outputPath: 'zcv',
+                outputPath: 'static/js',
+                publicPath: '.',
                 name: '[name].[ext]',
               },
             },
@@ -791,3 +819,11 @@ module.exports = {
 ```
 
 You will also need to serve the dev server using `https`, refer to create-react-app and react-app rewired documentation for instructions.
+
+## Links and Resources
+
+- [Web site](https://zap.works/universal-ar/)
+- [Documentation](https://docs.zap.works/universal-ar/web-libraries/react-threejs/)
+- [Forum](https://forum.zap.works/)
+- [Issue tracker](https://github.com/zappar-xr/zappar-react-three-fiber/issues)
+- [Source code](https://github.com/zappar-xr/zappar-react-three-fiber)

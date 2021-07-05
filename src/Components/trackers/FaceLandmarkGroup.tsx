@@ -8,6 +8,11 @@ import useStore from "../../store";
 const { FaceLandmarkGroup } = ZapparThree;
 extend({ FaceLandmarkGroup });
 
+/**
+ * A `THREE.Group` which attaches content to a known point (landmark) on a face as it moves around in the camera view.
+ * Landmarks will remain accurate, even as the user's expression changes.
+ * @see https://docs.zap.works/universal-ar/web-libraries/react-threejs/face-tracking/
+ */
 const zapparFaceLandmark = forwardRef((props: Props.FaceLandmark, ref) => {
   const { children, trackerGroup, camera, target } = props;
   const faceLandmarkGroupRef = useRef();

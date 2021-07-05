@@ -2,7 +2,10 @@ import { useEffect } from "react";
 import * as ZapparThree from "@zappar/zappar-threejs";
 import { Props } from "../../spec";
 
-// eslint-disable-next-line no-unused-vars
+/**
+ * Creates a THREE.DefaultLoadingManager which is applied to all assets that can be loaded.
+ * @see https://docs.zap.works/universal-ar/web-libraries/threejs/loading-manager/
+ */
 const ZapparLoader = (props: Props.Loader) => {
   const { style, onLoad } = props;
 

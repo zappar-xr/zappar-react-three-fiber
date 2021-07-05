@@ -5,10 +5,10 @@ import React, { Suspense, useRef } from "react";
 import { render } from "react-dom";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
-import { FaceBufferGeometry, FaceTracker, ZapparCamera, ZapparCanvas, BrowserCompatibility, Types } from "../src/index";
+import { FaceBufferGeometry, FaceTracker, ZapparCamera, ZapparCanvas, BrowserCompatibility, Types } from "../../src/index";
 
 const FaceMeshMaterial = () => {
-  const faceMapSrc: string = require("file-loader!./assets/faceMeshTemplate.png").default;
+  const faceMapSrc: string = require("file-loader!../assets/faceMeshTemplate.png").default;
   const faceMapTexture = useLoader(TextureLoader, faceMapSrc);
   return <meshStandardMaterial transparent map={faceMapTexture} color="red" />;
 };

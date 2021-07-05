@@ -1,7 +1,6 @@
 import { render } from "react-dom";
 import React from "react";
-import { ZapparCamera, InstantTracker, ZapparCanvas } from "../src/index";
-import "./instantTracking.css";
+import { ZapparCamera, InstantTracker, ZapparCanvas } from "../../src/index";
 
 export default function App() {
   return (

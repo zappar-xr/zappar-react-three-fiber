@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { FaceLandmark, FaceTracker, ZapparCamera, ZapparCanvas } from "../src/index";
+import { FaceLandmark, FaceTracker, ZapparCamera, ZapparCanvas } from "../../src/index";
 
 export default function App() {
   const landmarks = [

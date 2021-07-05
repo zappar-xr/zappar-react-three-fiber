@@ -1,6 +1,9 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
 
+/**
+ * A canvas with linear encoding and auto-updating dpr.
+ */
 const zapparCanvas = ({ ...props }) => {
   const { children } = props;
 

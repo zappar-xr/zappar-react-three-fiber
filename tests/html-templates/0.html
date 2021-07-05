@@ -17,11 +17,25 @@
             height: 100%;
             position: relative;
         }
-              .options {
+        .options {
             display: flex;
             flex-direction: row;
             height: 50px;
             width: 100%;
+        }
+        #zappar-placement-ui {
+          position: absolute;
+          bottom: 30px;
+          width: 200px;
+          left: calc(50% - 100px);
+          z-index: 1000;
+          background-color: rgba(0, 0, 0, 0.8);
+          color: white;
+          text-align: center;
+          font-family: sans-serif;
+          padding: 10px;
+          border-radius: 5px;
+          position: "absolute";
         }
 
         .options > select {
