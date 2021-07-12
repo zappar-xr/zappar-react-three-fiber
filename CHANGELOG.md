@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.5] - 2021-07-12
+
+### Fixed
+
+- Incorrect `main` and `types` paths in `package.json`.
+
 ## [1.0.4] - 2021-07-05
 
 - Updated compatibility section in `README.md`
