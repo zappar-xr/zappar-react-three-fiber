@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.6] - 2021-07-15
+
+- Updated dependencies.
+
+### Added
+
+- Typings to the props of `ZapparCanvas` component.
+
+### Fixed
+
+- `ZapparCanvas` `resize` polyfill added.
+
 ## [1.0.5] - 2021-07-12
 
 ### Fixed
