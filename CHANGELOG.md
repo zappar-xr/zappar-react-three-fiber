@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.7] - 2021-07-15
+
+- Bump `@react-three/fiber` support to 7.0.7.
+
 ## [1.0.6] - 2021-07-15
 
 - Updated dependencies.

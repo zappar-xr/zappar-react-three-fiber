@@ -40,7 +40,7 @@
     "umd/**/*"
   ],
   "devDependencies": {
-    "@react-three/fiber": "^7.0.5",
+    "@react-three/fiber": "7.0.7",
     "@types/expect-puppeteer": "^2.2.1",
     "@types/jest": "^22.2.3",
     "@types/jest-environment-puppeteer": "^2.2.0",
@@ -89,7 +89,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "peerDependencies": {
-    "@react-three/fiber": "^6.0.1",
+    "@react-three/fiber": "<= 7.0.7",
     "react": ">= 16.8"
   },
   "dependencies": {
