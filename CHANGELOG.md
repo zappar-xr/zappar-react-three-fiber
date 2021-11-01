@@ -1,6 +1,16 @@
 # Changelog
 
-## [1.0.7] - 2021-07-15
+## [1.0.9] - 2021-11-01
+
+### Changed
+
+- Pinned dependencies to exact versions.
+
+## [1.0.8] - 2021-10-04
+
+- Audit fix.
+
+## [1.0.7] - 2021-10-04
 
 - Bump `@react-three/fiber` support to 7.0.7.
 

@@ -89,7 +89,7 @@ module.exports = async (env) => {
   baseConfig.devtool = "eval-cheap-source-map";
 
   baseConfig.devServer = {
-    contentBase: "./test-dist",
+    static: "./test-dist",
     https: true,
     host: "0.0.0.0",
     open: false,
