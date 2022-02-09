@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.10] - 2022-02-09
+
+### Fixed
+
+- Issue where `useInstantTracker` never gets called.
+
 ## [1.0.9] - 2021-11-01
 
 ### Changed

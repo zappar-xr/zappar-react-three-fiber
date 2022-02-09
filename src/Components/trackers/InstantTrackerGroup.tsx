@@ -16,7 +16,7 @@ extend({ InstantWorldAnchorGroup });
  * @see https://docs.zap.works/universal-ar/web-libraries/react-threejs/instant-world-tracking/
  */
 const ZapparInstantTracker = forwardRef((props: Props.InstantWorldAnchorGroup, ref) => {
-  const { camera, placementMode, children, placementCameraOffset, pipeline, placementUI } = props;
+  const { camera, placementMode, children, placementCameraOffset, pipeline, placementUI, useInstantTracker } = props;
   const InstantTrackerGroupRef = useRef();
   const [_placementMode, set_placementMode] = useState(placementMode);
 
@@ -33,6 +33,12 @@ const ZapparInstantTracker = forwardRef((props: Props.InstantWorldAnchorGroup, r
   const store = useStore.camera((state) => state);
   const zapparCamera = camera?.current ? camera.current : store.object;
   const placementOffset = placementCameraOffset || { x: 0, y: 0, z: -5 };
+
+  useEffect(() => {
+    if (instantWorldTracker) {
+      if (useInstantTracker) useInstantTracker(instantWorldTracker);
+    }
+  }, [useInstantTracker, instantWorldTracker]);
 
   useFrame(() => {
     if (_placementMode && instantWorldTracker) {
