@@ -187,6 +187,9 @@ export namespace Props {
     /** The pipeline that this component will operate within. */
     pipeline?: ZapparThree.Pipeline;
 
+    /** Disables tracking if set to `false`. Default is `true`. */
+    enabled?: boolean;
+
   } & anchorVisibilityEvents<ZapparThree.ImageAnchor>;
 
 
@@ -221,6 +224,9 @@ export namespace Props {
 
     /** Renders a button which toggles the current placementMode.  */
     placementUI?: placementUIType
+
+    /** Disables tracking if set to `false`. Default is `true`. */
+    enabled?: boolean;
   };
 
   export type FaceTrackerAnchorGroup = JSX.IntrinsicElements["faceAnchorGroup"] & {
@@ -241,6 +247,9 @@ export namespace Props {
 
     /** The pipeline that this component will operate within. */
     pipeline?: ZapparThree.Pipeline;
+
+    /** Disables tracking if set to `false`. Default is `true`. */
+    enabled?: boolean;
 
   } & anchorVisibilityEvents<ZapparThree.FaceAnchor>;;
 

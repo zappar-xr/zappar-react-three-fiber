@@ -4,6 +4,7 @@ import { extend } from "@react-three/fiber";
 import mergeRefs from "react-merge-refs";
 import { Props } from "../../spec";
 import useStore from "../../store";
+import ToggleTrackerEnabledState from "../../hooks/trackerEnabled";
 
 const { FaceAnchorGroup } = ZapparThree;
 extend({ FaceAnchorGroup });
@@ -13,8 +14,7 @@ extend({ FaceAnchorGroup });
  * @see https://docs.zap.works/universal-ar/web-libraries/react-threejs/face-tracking/
  */
 const ZapparFaceAnchorGroup = forwardRef((props: Props.FaceTrackerAnchorGroup, ref) => {
-  const { camera, children, useFaceTracker, onNotVisible, onVisible, onNewAnchor, pipeline, model } = props;
-
+  const { camera, children, useFaceTracker, onNotVisible, onVisible, onNewAnchor, pipeline, model, enabled } = props;
   const [faceTracker, setFaceTracker] = useState<ZapparThree.FaceTracker>();
   const faceAnchorGroupRef = React.useRef<ZapparThree.FaceAnchorGroup>();
 
@@ -51,6 +51,8 @@ const ZapparFaceAnchorGroup = forwardRef((props: Props.FaceTrackerAnchorGroup, r
       }
     };
   }, [useFaceTracker, onVisible, onNotVisible, faceAnchorGroupRef, faceTracker]);
+
+  ToggleTrackerEnabledState(faceTracker, enabled);
 
   if (!faceTracker || !zapparCamera) return null;
   return (

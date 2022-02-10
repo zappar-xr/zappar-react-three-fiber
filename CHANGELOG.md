@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.0.11] - 2022-02-10
+
+### Added
+
+- `enabled` prop to the tracker group components. This can be used to disable/enable the underling tracker.
+
 ## [1.0.10] - 2022-02-09
 
 ### Fixed

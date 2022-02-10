@@ -7,6 +7,7 @@ import mergeRefs from "react-merge-refs";
 import { Props } from "../../spec";
 import useStore from "../../store";
 import PlacementUI from "../util/PlacementUI";
+import ToggleTrackerEnabledState from "../../hooks/trackerEnabled";
 
 const { InstantWorldAnchorGroup } = ZapparThree;
 extend({ InstantWorldAnchorGroup });
@@ -16,7 +17,7 @@ extend({ InstantWorldAnchorGroup });
  * @see https://docs.zap.works/universal-ar/web-libraries/react-threejs/instant-world-tracking/
  */
 const ZapparInstantTracker = forwardRef((props: Props.InstantWorldAnchorGroup, ref) => {
-  const { camera, placementMode, children, placementCameraOffset, pipeline, placementUI, useInstantTracker } = props;
+  const { camera, placementMode, children, placementCameraOffset, pipeline, placementUI, useInstantTracker, enabled } = props;
   const InstantTrackerGroupRef = useRef();
   const [_placementMode, set_placementMode] = useState(placementMode);
 
@@ -51,6 +52,8 @@ const ZapparInstantTracker = forwardRef((props: Props.InstantWorldAnchorGroup, r
       }
     }
   });
+
+  ToggleTrackerEnabledState(instantWorldTracker, enabled);
 
   if (!zapparCamera || !instantWorldTracker) return null;
 

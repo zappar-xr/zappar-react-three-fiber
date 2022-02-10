@@ -4,6 +4,7 @@ import { extend } from "@react-three/fiber";
 import mergeRefs from "react-merge-refs";
 import { Props } from "../../spec";
 import useStore from "../../store";
+import ToggleTrackerEnabledState from "../../hooks/trackerEnabled";
 
 const { ImageAnchorGroup } = ZapparThree;
 extend({ ImageAnchorGroup });
@@ -13,7 +14,7 @@ extend({ ImageAnchorGroup });
  * @see https://docs.zap.works/universal-ar/web-libraries/react-threejs/image-tracking/
  */
 const ZapparImageTracker = forwardRef((props: Props.ImageTrackerGroup, ref) => {
-  const { useImageTracker, onNotVisible, onNewAnchor, onVisible, targetImage, camera, children, pipeline } = props;
+  const { useImageTracker, onNotVisible, onNewAnchor, onVisible, targetImage, camera, children, pipeline, enabled } = props;
   const imageTrackerGroupRef = useRef();
 
   const store = useStore.camera((state) => state);
@@ -37,6 +38,8 @@ const ZapparImageTracker = forwardRef((props: Props.ImageTrackerGroup, ref) => {
       if (onVisible) imageTracker?.onVisible.unbind(onVisible);
     };
   }, [useImageTracker, onVisible, onNewAnchor, onNotVisible, imageTracker]);
+
+  ToggleTrackerEnabledState(imageTracker, enabled);
 
   if (!zapparCamera || !imageTracker) return null;
   return (
