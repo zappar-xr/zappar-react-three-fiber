@@ -92,7 +92,7 @@
   },
   "peerDependencies": {
     "@react-three/drei": ">= 7",
-    "@react-three/fiber": "^6.0.0",
+    "@react-three/fiber": ">= 6.0.0",
     "react": ">= 16.8"
   },
   "dependencies": {

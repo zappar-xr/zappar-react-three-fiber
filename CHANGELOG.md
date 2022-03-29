@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.3] - 2022-03-29
+
+### Changed
+
+- set peerDependencies `"@react-three/fiber"` to  `">= 6.0.0"`
+
 ## [1.2.2] - 2022-03-29
 
 ### Removed
