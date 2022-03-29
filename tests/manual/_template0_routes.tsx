@@ -3,7 +3,7 @@
 /* eslint-disable import/no-webpack-loader-syntax */
 import React, { Suspense, useMemo, useRef, useState } from "react";
 import { render } from "react-dom";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import * as ZapparThree from "@zappar/zappar-threejs";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
@@ -22,14 +22,14 @@ function App() {
           </li>
         </ul>
         <hr />
-        <Switch>
-          <Route exact path="/">
+        <Routes>
+          <Route path="/">
             <Home />
           </Route>
           <Route path="/routes">
             <Experience />
           </Route>
-        </Switch>
+        </Routes>
       </div>
     </Router>
   );

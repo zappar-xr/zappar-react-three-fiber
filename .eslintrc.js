@@ -30,9 +30,11 @@ module.exports = {
     "@typescript-eslint/no-use-before-define": [1],
     "no-shadow": [0],
     "no-multi-assign": [0],
+    "class-methods-use-this": [0],
     "react/jsx-props-no-spreading": [0],
     "react/require-default-props": [0],
     "import/extensions": [0],
+    "no-underscore-dangle": [0],
     "max-len": [
       "error",
       {

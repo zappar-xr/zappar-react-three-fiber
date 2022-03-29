@@ -19,7 +19,7 @@ const style: CSSProperties = {
 /**
  * Renders a button which toggles the current placementMode.
  */
-const PlacementUI = ({ onInteract, placementType }: Props.PlacementUI) => {
+function PlacementUI({ onInteract, placementType }: Props.PlacementUI) {
   const [placementMode, setPlacementMode] = useState(true);
   const [ready, setReady] = useState(false);
 
@@ -56,6 +56,6 @@ const PlacementUI = ({ onInteract, placementType }: Props.PlacementUI) => {
       </div>
     </Html>
   );
-};
+}
 
 export default PlacementUI;

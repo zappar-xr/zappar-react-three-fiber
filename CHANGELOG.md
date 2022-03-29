@@ -1,5 +1,61 @@
 # Changelog
 
+## [1.2.2] - 2022-03-29
+
+### Removed
+
+- `three` peer dependency locked to `<= 0.128.0`
+- `node` 16 engine requirement.
+
+### Fixed
+
+- Addressed texture encoding issues for the camera background texture with recent three.js versions.
+
+## [1.2.1] - 2022-03-25
+
+### Added
+
+- `.npmrc` - `engine-strict=true` to enforce node >= 16.
+
+## [1.2.0] - 2022-03-25
+
+### Breaking Changes
+
+- `three` peer dependency locked to `<= 0.128.0`
+- Temporarily Removed `CameraEnvironmentMap` component, please use `<ZapparCamera environmentMap />` instead.
+- Package now requires `node 16+` and `npm 8.3+`. This will be reverted once `ios 15.4` `webgl2` is stable.
+
+### Changed
+
+- Cleaned up `ZapparCanvas`.
+- Updated `README.md`
+- Updated dependencies.
+
+## [1.1.0] - 2022-02-15
+
+### Changed
+
+- Updated dependencies.
+
+### Removed
+
+- `useEnvironmentMap` prop from `ZapparCamera` component.
+
+### Added
+
+- `CameraEnvironmentMap` component. This can be used across the scene: `<CameraEnvironmentMap attach="environment" />` or be attached selectively across materials:
+
+```ts
+<mesh>
+  <sphereBufferGeometry />
+  <meshStandardMaterial metalness={1} roughness={0}>
+    <CameraEnvironmentMap attach="envMap" />
+  </meshStandardMaterial>
+</mesh>
+```
+
+- Additional tests added for `CameraEnvironmentMap`.
+
 ## [1.0.11] - 2022-02-10
 
 ### Added

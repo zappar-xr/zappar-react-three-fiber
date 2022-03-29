@@ -63,7 +63,7 @@ You may also be interested in:
       * [Integrating into an existing create-react-app project](#integrating-into-an-existing-create-react-app-project)
       * [Links and Resources](#links-and-resources)
 
-<!-- Added by: zapparadmin, at: Thu Feb 10 14:02:39 GMT 2022 -->
+<!-- Added by: zapparadmin, at: Tue Mar 29 20:15:05 BST 2022 -->
 
 <!--te-->
 
@@ -411,24 +411,6 @@ To apply the map to your scene, simply pass `environmentMap` prop to the `Zappar
 
 ```tsx
 <ZapparCamera environmentMap />
-```
-
-Alternatively, you may get the texture to attach to specific object materials by passing in a callback function to `useEnvironmentMap`:
-
-```tsx
-const App = () => {
-  const [envMap, setEnvMap] = useState<THREE.Texture>();
-  return (
-    <ZapparCanvas>
-      <ZapparCamera useEnvironmentMap={setEnvMap} />
-      <mesh position={[0, 0, -5]}>
-        <sphereBufferGeometry />
-        <meshStandardMaterial metalness={1} roughness={0} envMap={envMap} />
-      </mesh>
-      <directionalLight position={[2.5, 8, 5]} intensity={1.5} />
-    </ZapparCanvas>
-  );
-};
 ```
 
 ### Camera Pose

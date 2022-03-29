@@ -1,5 +1,6 @@
 import * as ZapparThree from "@zappar/zappar-threejs";
-import React, { forwardRef, useEffect, useLayoutEffect, useState } from "react";
+import React, { forwardRef, useEffect, useMemo, useState } from "react";
+import { CameraTexture } from "@zappar/zappar-threejs/lib/cameraTexture";
 import mergeRefs from "react-merge-refs";
 import { extend, useFrame, useThree } from "@react-three/fiber";
 import { Props } from "../spec";
@@ -27,24 +28,33 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
     pipeline,
     sources,
     makeDefault = true,
-    renderPriority = 1,
+    renderPriority = 2,
+    environmentMap = false,
     permissionRequest = true,
     onFirstFrame,
-    environmentMap,
-    useEnvironmentMap,
+    backgroundImageProps,
   } = props;
 
-  const { gl, scene, set } = useThree((state) => state);
+  const { gl, set } = useThree((state) => state);
 
   const [hadFirstFrame, setHadFirstFrame] = useState(false);
 
+  const [cameraTexture] = useState(new CameraTexture());
+  const cameraEnvMap = useMemo(() => {
+    return environmentMap ? new ZapparThree.CameraEnvironmentMap() : undefined;
+  }, [environmentMap]);
+
+  useEffect(() => {
+    if (backgroundImageProps && cameraTexture) Object.assign(cameraTexture, backgroundImageProps);
+  }, [backgroundImageProps, cameraTexture]);
+
   const cameraRef = React.useRef<ZapparCameraAdditional>();
 
-  const [envMap, setEnvMap] = useState<ZapparThree.CameraEnvironmentMap>();
-
   const [permissionGranted, setPermissionGranted] = useState<boolean>(false);
+
   const store = {
     camera: useStore.camera((state) => state),
+    // cameraEnvironmentMap: useStore.cameraEnvironmentMap((state) => state),
   };
 
   useEffect(() => {
@@ -55,25 +65,16 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
   // TODO: If not making default, scene's texture should not be changed, and camera should not tick.
   // TODO: Instead, it should be exposed to user to set when needed.
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (makeDefault) {
       set(() => ({ camera: cameraRef.current as any }));
     }
   }, [makeDefault]);
 
   useEffect(() => {
-    if (environmentMap || useEnvironmentMap) {
-      const envMap = new ZapparThree.CameraEnvironmentMap();
-      if (environmentMap) scene.environment = envMap.environmentMap;
-      useEnvironmentMap?.(envMap.environmentMap); // Overlap with THREE.texture
-      setEnvMap(envMap);
-    }
-  }, [environmentMap]);
-
-  useEffect(() => {
     if (!cameraRef.current) return;
     store.camera.set(cameraRef.current);
-    scene.background = cameraRef.current!.backgroundTexture;
+
     if (permissionGranted || !permissionRequest) {
       cameraRef.current!.start(userFacing);
     } else {
@@ -128,25 +129,32 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
 
   useFrame(({ gl, scene }) => {
     if (!cameraRef.current) return;
-
     if (onFirstFrame && !hadFirstFrame && cameraRef.current.pipeline.frameNumber() > 0) {
       setHadFirstFrame(true);
       onFirstFrame();
     }
 
+    // store.cameraEnvironmentMap.object?.update(gl, cameraRef.current);
+    cameraEnvMap?.update(gl, cameraRef.current);
+    // eslint-disable-next-line no-param-reassign
     cameraRef.current.updateFrame(gl);
-
-    envMap?.update(gl, cameraRef.current);
 
     gl.render(scene, cameraRef.current);
   }, renderPriority);
 
+  // eslint-disable-next-line no-underscore-dangle
+  if (cameraRef.current) (cameraRef.current as any).__r3f.primitive = true;
+
   return (
-    <zapparCameraAdditional
-      args={[{ pipeline, userCameraSource: sources?.userCamera, rearCameraSource: sources?.rearCamera }]}
-      ref={mergeRefs([cameraRef, ref])}
-      {...props}
-    />
+    <>
+      <primitive object={cameraTexture} attach="background" />
+      {environmentMap && <primitive object={cameraEnvMap!.environmentMap} attach="environment" />}
+      <zapparCameraAdditional
+        args={[{ pipeline, userCameraSource: sources?.userCamera, rearCameraSource: sources?.rearCamera, backgroundTexture: cameraTexture }]}
+        ref={mergeRefs([cameraRef, ref])}
+        {...props}
+      />
+    </>
   );
 });
 

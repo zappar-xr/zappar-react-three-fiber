@@ -7,7 +7,7 @@ import { toMatchImageSnapshot } from "jest-image-snapshot";
 expect.extend({ toMatchImageSnapshot });
 jest.setTimeout(60000);
 
-const url = "https://0.0.0.0:8081/pages/jest/module/camera-environment-map.html";
+const url = "https://0.0.0.0:8082/pages/jest/module/camera-environment-map-global-cam-prop.html";
 describe("face tracking", () => {
   it("console logs", async () => {
     const page = await browser.newPage();

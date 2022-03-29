@@ -4,6 +4,7 @@
 /* eslint-disable no-unused-vars */
 import * as ZapparThree from "@zappar/zappar-threejs";
 import React from "react";
+import { CameraTexture as ZapparThreeCameraTexture } from "@zappar/zappar-threejs/lib/cameraTexture";
 
 import { ReactThreeFiber } from "@react-three/fiber";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -72,6 +73,8 @@ declare global {
       faceBufferGeometry: ReactThreeFiber.Object3DNode<ZapparThree.FaceBufferGeometry,typeof ZapparThree.FaceBufferGeometry>;
       faceLandmarkGroup: ReactThreeFiber.Object3DNode<ZapparThree.FaceLandmarkGroup,typeof ZapparThree.FaceLandmarkGroup>;
       headMaskMesh: ReactThreeFiber.Object3DNode<THREE.Mesh, typeof THREE.Mesh>;
+      // cameraTexture: ReactThreeFiber.Object3DNode<ZapparThreeCameraTexture, typeof ZapparThreeCameraTexture>;
+      // cameraEnvironmentMap: ReactThreeFiber.Object3DNode<ZapparThree.CameraEnvironmentMap, typeof ZapparThree.CameraEnvironmentMap>;
 
       loader: DetailedHTMLProps<HTMLDivElement>;
       BrowserCompatibility: DetailedHTMLProps<HTMLDivElement>;
@@ -157,12 +160,8 @@ export namespace Props {
      * */
     environmentMap?: boolean,
 
-    /**
-     * Returns an automatically generated environment map that's useful if you're using materials that support reflections.
-     * The map uses the camera feed to create an approximate environment that can add some realism to your scene.
-     * */
-    // Omit update as it's called internally.
-    useEnvironmentMap?: (map :  THREE.Texture) => void,
+    /** Props that are passed into the camera's background image. */
+    backgroundImageProps?: Partial<THREE.Texture>
   };
 
   /**
@@ -277,6 +276,12 @@ export namespace Props {
     animations?: any;
   };
 
+  // export type CameraTexture = JSX.IntrinsicElements["cameraTexture"] & {
+
+  //   /** @ignore */
+  //   animations?: any;
+  // };
+
   export type FaceLandmark = JSX.IntrinsicElements["faceLandmarkGroup"] & {
     /** A refference to a Zappar camera. */
     camera?: ZapparCamera;
@@ -321,9 +326,15 @@ export namespace Props {
     placementType: placementUIType;
   };
 
+  // export type CameraEnvironmentMap = JSX.IntrinsicElements["cameraEnvironmentMap"] & {
+
+
+  //   /** @ignore */
+  //   animations?: any;
+  // };
+
 }
 
-/** */
 type ZapparCamera = React.MutableRefObject<ZapparThree.Camera | undefined>;
 
 /** Elements available for styling. */
@@ -358,6 +369,15 @@ export namespace Store {
   export type imageTracker = StoreType<ZapparThree.ImageTracker>;
   export type faceTracker = StoreType<ZapparThree.FaceTracker>;
   export type instantTracker = StoreType<ZapparThree.InstantWorldTracker>;
+  // export type cameraEnvironmentMap = StoreType<ZapparThree.CameraEnvironmentMap>;
+
+  export type Store = {
+    camera: camera,
+    imageTracker: imageTracker,
+    faceTracker: faceTracker,
+    instantTracker: instantTracker,
+    // cameraEnvironmentMap: cameraEnvironmentMap
+  }
 }
 
 /** Types of various underling component objects. */
@@ -373,4 +393,5 @@ export namespace Types {
   export type FaceMesh = ZapparThree.FaceMesh
   export type HeadMaskMesh = ZapparThree.HeadMaskMesh
   export type FaceLandmark = ZapparThree.FaceLandmark
+  // export type CameraEnvironmentMap = ZapparThree.CameraEnvironmentMap;
 }

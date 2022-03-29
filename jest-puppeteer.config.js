@@ -15,7 +15,7 @@ module.exports = {
   browserContext: "default",
   server: {
     command: "npm run start",
-    port: 8081,
+    port: 8082,
     launchTimeout: 60000 * 5,
   },
 };

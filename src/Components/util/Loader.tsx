@@ -6,7 +6,7 @@ import { Props } from "../../spec";
  * Creates a THREE.DefaultLoadingManager which is applied to all assets that can be loaded.
  * @see https://docs.zap.works/universal-ar/web-libraries/threejs/loading-manager/
  */
-const ZapparLoader = (props: Props.Loader) => {
+function ZapparLoader(props: Props.Loader) {
   const { style, onLoad } = props;
 
   useEffect(() => {
@@ -18,6 +18,6 @@ const ZapparLoader = (props: Props.Loader) => {
   }, [props]);
 
   return null;
-};
+}
 
 export default ZapparLoader;

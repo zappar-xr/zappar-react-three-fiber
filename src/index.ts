@@ -15,3 +15,4 @@ export { default as ZapparCamera } from "./Components/ZapparCamera";
 export { default as ZapparCanvas } from "./Components/ZapparCanvas";
 export { default as Loader } from "./Components/util/Loader";
 export { default as BrowserCompatibility } from "./Components/util/Compatibility";
+// export { default as CameraEnvironmentMap } from "./Components/CameraEnvironmentMap";

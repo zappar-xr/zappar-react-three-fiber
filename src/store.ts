@@ -21,9 +21,15 @@ const faceTracker = create<Store.faceTracker>((set) => ({
   set: (tracker) => set({ object: tracker }),
 }));
 
+// const cameraEnvironmentMap = create<Store.cameraEnvironmentMap>((set) => ({
+//   object: undefined,
+//   set: (tracker) => set({ object: tracker }),
+// }));
+
 export default {
   camera,
   imageTracker,
   instantTracker,
   faceTracker,
+  // cameraEnvironmentMap,
 };

@@ -1,14 +1,14 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-webpack-loader-syntax */
 /* eslint-disable global-require */
 /* eslint-disable import/no-unresolved */
 import React, { useMemo, useState } from "react";
 import { render } from "react-dom";
-
 import { ZapparCamera, ZapparCanvas, BrowserCompatibility, LogLevel, setLogLevel } from "../../../src/index";
 
 setLogLevel(LogLevel.LOG_LEVEL_VERBOSE);
 
-const App = () => {
+function App() {
   const imgSrc = require("file-loader!../../assets/sources/face.png").default;
   const [loading, setLoading] = useState(true);
 
@@ -26,8 +26,13 @@ const App = () => {
     <>
       <BrowserCompatibility fallback={<div>Sorry!</div>} />
       <ZapparCanvas>
-        <ZapparCamera permissionRequest={false} sources={{ rearCamera: img }} environmentMap />
-        <mesh position={[0, 0, -5]}>
+        <ZapparCamera environmentMap permissionRequest={false} sources={{ rearCamera: img }} />
+        <mesh scale={0.1} position={[0, 0, -2]}>
+          <sphereBufferGeometry />
+          <meshStandardMaterial metalness={1} roughness={0} />
+        </mesh>
+
+        <mesh scale={0.1} position={[0, -0.5, -2]}>
           <sphereBufferGeometry />
           <meshStandardMaterial metalness={1} roughness={0} />
         </mesh>
@@ -35,5 +40,5 @@ const App = () => {
       </ZapparCanvas>
     </>
   );
-};
+}
 render(<App />, document.getElementById("root"));

@@ -94,7 +94,10 @@ module.exports = async (env) => {
     host: "0.0.0.0",
     open: false,
     hot: true,
-    port: 8081,
+    port: 8082,
+    client: {
+      overlay: false,
+    },
   };
 
   baseConfig.output.path = path.resolve(__dirname, "test-dist");
