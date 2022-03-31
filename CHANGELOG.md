@@ -1,5 +1,12 @@
 # Changelog
 
+
+## [1.2.4] - 2022-03-31
+
+### Changed
+
+- Disabled `antiAlias` on the `ZapparCanvas` component. This is a temp fix for ios 15.4.
+
 ## [1.2.3] - 2022-03-29
 
 ### Changed

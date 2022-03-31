@@ -9,7 +9,15 @@ import { ResizeObserver } from "@juggle/resize-observer";
 const zapparCanvas = (props: Props) => {
   const { children } = props;
   return (
-    <Canvas flat resize={{ polyfill: ResizeObserver }} linear dpr={window.devicePixelRatio} id="zapparCanvas" {...props}>
+    <Canvas
+      flat
+      resize={{ polyfill: ResizeObserver }}
+      linear
+      dpr={window.devicePixelRatio}
+      id="zapparCanvas"
+      {...props}
+      gl={{ antialias: false, ...props.gl }}
+    >
       {children}
     </Canvas>
   );
