@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as ZapparThree from "@zappar/zappar-threejs";
 import React, { forwardRef, useEffect, useMemo, useState } from "react";
 import { CameraTexture } from "@zappar/zappar-threejs/lib/cameraTexture";
@@ -134,27 +135,27 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
       onFirstFrame();
     }
 
-    // store.cameraEnvironmentMap.object?.update(gl, cameraRef.current);
     cameraEnvMap?.update(gl, cameraRef.current);
-    // eslint-disable-next-line no-param-reassign
+
     cameraRef.current.updateFrame(gl);
 
     gl.render(scene, cameraRef.current);
   }, renderPriority);
 
-  // eslint-disable-next-line no-underscore-dangle
-  if (cameraRef.current) (cameraRef.current as any).__r3f.primitive = true;
-
-  return (
-    <>
-      <primitive object={cameraTexture} attach="background" />
-      {environmentMap && <primitive object={cameraEnvMap!.environmentMap} attach="environment" />}
-      <zapparCameraAdditional
-        args={[{ pipeline, userCameraSource: sources?.userCamera, rearCameraSource: sources?.rearCamera, backgroundTexture: cameraTexture }]}
-        ref={mergeRefs([cameraRef, ref])}
-        {...props}
-      />
-    </>
+  return React.useMemo(
+    () => (
+      <>
+        <primitive object={cameraTexture} attach="background" />
+        {environmentMap && <primitive object={cameraEnvMap!.environmentMap} attach="environment" />}
+        <zapparCameraAdditional
+          // eslint-disable-next-line react/prop-types
+          args={[{ pipeline, userCameraSource: sources?.userCamera, rearCameraSource: sources?.rearCamera, backgroundTexture: cameraTexture }]}
+          ref={mergeRefs([cameraRef, ref])}
+          {...props}
+        />
+      </>
+    ),
+    [cameraTexture, cameraEnvMap, sources, props]
   );
 });
 

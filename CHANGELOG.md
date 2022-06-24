@@ -1,5 +1,10 @@
 # Changelog
 
+## [1.2.5] - 2022-06-24
+
+### Fixed
+
+- Multiple re-renders of `ZapparCamera` which caused the front camera to behave in unexpected ways.
 
 ## [1.2.4] - 2022-03-31
 
