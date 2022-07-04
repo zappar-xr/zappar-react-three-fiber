@@ -58,7 +58,7 @@
     "@zappar/jest-console-logs": "1.0.4",
     "@zappar/mobile-only": "0.0.2",
     "css-loader": "6.6.0",
-    "eslint": "8.8.0",
+    "eslint": "8.19.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.25.4",
