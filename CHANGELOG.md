@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.6] - 2022-07-21
+
+### Fixed
+
+- An issue where `troika-text` would corrupt gl state on some devices.
+
 ## [1.2.5] - 2022-06-24
 
 ### Fixed
