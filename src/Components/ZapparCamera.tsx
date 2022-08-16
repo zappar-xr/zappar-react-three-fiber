@@ -38,7 +38,7 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
 
   const { gl, set } = useThree((state) => state);
 
-  const [hadFirstFrame, setHadFirstFrame] = useState(false);
+  const hadFirstFrame = React.useRef(false);
 
   const [cameraTexture] = useState(new CameraTexture());
   const cameraEnvMap = useMemo(() => {
@@ -130,8 +130,8 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
 
   useFrame(({ gl, scene }) => {
     if (!cameraRef.current) return;
-    if (onFirstFrame && !hadFirstFrame && cameraRef.current.pipeline.frameNumber() > 0) {
-      setHadFirstFrame(true);
+    if (onFirstFrame && !hadFirstFrame.current && cameraRef.current.pipeline.frameNumber() > 0) {
+      hadFirstFrame.current = true;
       onFirstFrame();
     }
 
@@ -142,20 +142,17 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
     gl.render(scene, cameraRef.current);
   }, renderPriority);
 
-  return React.useMemo(
-    () => (
-      <>
-        <primitive object={cameraTexture} attach="background" />
-        {environmentMap && <primitive object={cameraEnvMap!.environmentMap} attach="environment" />}
-        <zapparCameraAdditional
-          // eslint-disable-next-line react/prop-types
-          args={[{ pipeline, userCameraSource: sources?.userCamera, rearCameraSource: sources?.rearCamera, backgroundTexture: cameraTexture }]}
-          ref={mergeRefs([cameraRef, ref])}
-          {...props}
-        />
-      </>
-    ),
-    [cameraTexture, cameraEnvMap, sources, props]
+  return (
+    <>
+      <primitive dispose={null} object={cameraTexture} attach="background" />
+      {environmentMap && <primitive dispose={null} object={cameraEnvMap!.environmentMap} attach="environment" />}
+      <zapparCameraAdditional
+        dispose={null}
+        args={[{ pipeline, userCameraSource: sources?.userCamera, rearCameraSource: sources?.rearCamera, backgroundTexture: cameraTexture }]}
+        ref={mergeRefs([cameraRef, ref])}
+        {...props}
+      />
+    </>
   );
 });
 

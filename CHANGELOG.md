@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.7] - 2022-08-16
+
+### Fixed
+
+- An issue where `ZapparCamera` would get disposed between renders.
+
 ## [1.2.6] - 2022-07-21
 
 ### Fixed
