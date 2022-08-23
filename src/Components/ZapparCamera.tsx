@@ -33,6 +33,7 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
     environmentMap = false,
     permissionRequest = true,
     onFirstFrame,
+    start = true,
     backgroundImageProps,
   } = props;
 
@@ -75,7 +76,7 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
   useEffect(() => {
     if (!cameraRef.current) return;
     store.camera.set(cameraRef.current);
-
+    if (!start) return;
     if (permissionGranted || !permissionRequest) {
       cameraRef.current!.start(userFacing);
     } else {
@@ -85,7 +86,7 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
         else ZapparThree.permissionDeniedUI();
       });
     }
-  }, [userFacing, permissionRequest]);
+  }, [userFacing, permissionRequest, start]);
 
   useEffect(() => {
     if (!cameraRef.current) return;

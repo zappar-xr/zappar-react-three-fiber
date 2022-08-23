@@ -33,11 +33,6 @@ module.exports = {
         }
       },
       {
-        test: /zcv\.wasm$/,
-        type: "javascript/auto",
-        loader: "file-loader",
-      },
-      {
         test: /\.(sa|sc|c)ss$/,
         use: ["style-loader", "css-loader"],
       },

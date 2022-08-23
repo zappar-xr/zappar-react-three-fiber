@@ -11,7 +11,7 @@ const url = "https://0.0.0.0:8082/pages/jest/module/simple-face.html";
 describe("face tracking", () => {
   it("console logs", async () => {
     const page = await browser.newPage();
-    page.goto(url);
+    page.goto(url, { timeout: 0 });
     await util.expectLogs({
       expected: [
         /^Zappar for React Three v/,
@@ -26,7 +26,7 @@ describe("face tracking", () => {
         "Anchor is visible",
       ],
       page,
-      timeoutMs: 30000,
+      timeoutMs: 60000,
     });
 
     // Wait 1s for texture to load

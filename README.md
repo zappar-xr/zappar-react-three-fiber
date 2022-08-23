@@ -63,7 +63,7 @@ You may also be interested in:
       * [Integrating into an existing create-react-app project](#integrating-into-an-existing-create-react-app-project)
       * [Links and Resources](#links-and-resources)
 
-<!-- Added by: zapparadmin, at: Tue Aug 16 11:29:44 BST 2022 -->
+<!-- Added by: zapparadmin, at: Tue Aug 23 14:26:17 BST 2022 -->
 
 <!--te-->
 
@@ -127,24 +127,7 @@ Then import the library into your JavaScript or TypeScript files:
 import { ZapparCamera /* ... */ } from "@zappar/zappar-react-three-fiber";
 ```
 
-The final step is to add this necessary entry to your webpack `rules`:
-
-```ts
-module.exports = {
-  //...
-  module: {
-    rules: [
-      //...
-      {
-        test: /zcv\.wasm$/,
-        type: "javascript/auto",
-        loader: "file-loader",
-      },
-      //...
-    ],
-  },
-};
-```
+Please note - This library supports Webpack 5 and later.
 
 ## Overview
 
@@ -762,22 +745,7 @@ module.exports = {
   webpack: function (config, env) {
     config.module.rules = config.module.rules.map(rule => {
       if (rule.oneOf instanceof Array) {
-        rule.oneOf[rule.oneOf.length - 1].exclude = [/\.(js|mjs|zbin|jsx|ts|tsx)$/, /\.html$/, /\.json$/];
-        return {
-          ...rule,
-          oneOf: [{
-              test: /zcv\.wasm$/,
-              type: "javascript/auto",
-              loader: "file-loader",
-              options: {
-                outputPath: 'static/js',
-                publicPath: '.',
-                name: '[name].[ext]',
-              },
-            },
-            ...rule.oneOf
-          ]
-        };
+        rule.oneOf[rule.oneOf.length - 1].exclude = [/\.(js|mjs|cjs|zbin|jsx|ts|tsx)$/, /\.html$/, /\.json$/];
       }
       return rule;
     });

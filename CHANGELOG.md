@@ -1,5 +1,23 @@
 # Changelog
 
+## [2.0.0] - 2022-08-23
+
+### Added
+
+- Greatly improved instant tracking.
+- Introduced `SequenceSource` and pipeline functions to record and playback sequences of camera+motion data.
+- Added support for curved tracking.
+- Added support for fetching image element containing target image's embedded preview image.
+- Improved GL state management.
+
+### Changed
+
+- Migrated to Webpack 5 workers.
+
+### **Breaking:**
+
+- Dropped support for webpack 4.
+
 ## [1.2.7] - 2022-08-16
 
 ### Fixed
@@ -94,23 +112,27 @@
 
 ## [1.0.10] - 2022-02-09
 
+- Introduced `SequenceSource` and pipeline functions to record and playback sequences of camera+motion data.
+- Added instant tracker jest test.
+- Added `start` prop to `ZapparCamera`, passing false will not automatically start the camera.
+
+## [1.0.11] - 2022-02-10
+
+### Added
+
+- `enabled` prop to the tracker group components. This can be used to disable/enable the underling tracker.
+
+## [1.0.10] - 2022-02-09
+
+## [1.1.0-beta.6] - 2022-02-09
+
 ### Fixed
 
 - Issue where `useInstantTracker` never gets called.
 
 ## [1.0.9] - 2021-11-01
 
-### Changed
-
-- Pinned dependencies to exact versions.
-
-## [1.0.8] - 2021-10-04
-
-- Audit fix.
-
-## [1.0.7] - 2021-10-04
-
-- Bump `@react-three/fiber` support to 7.0.7.
+- Updated dependencies.
 
 ## [1.0.6] - 2021-07-15
 

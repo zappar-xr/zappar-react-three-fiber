@@ -9,6 +9,8 @@ import { CameraTexture as ZapparThreeCameraTexture } from "@zappar/zappar-threej
 import { ReactThreeFiber } from "@react-three/fiber";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as THREE from "three";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { ImageTarget } from "@zappar/zappar/lib/imagetracker";
 
 /**
  * The pose modes that determine how the camera moves around in the scene.
@@ -66,13 +68,14 @@ declare global {
     type DetailedHTMLProps<T> = React.DetailedHTMLProps<React.HTMLAttributes<T>,T>;
     interface IntrinsicElements {
       // Omit some properties as we use custom implementations for them
-      zapparCameraAdditional: ReactThreeFiber.Object3DNode<Omit<ZapparThree.Camera,"userCameraMirrorMode" | "rearCameraMirrorMode" | "poseMode">,typeof ZapparThree.Camera>;
+      zapparCameraAdditional: ReactThreeFiber.Object3DNode<Omit<ZapparThree.Camera,"userCameraMirrorMode" | "rearCameraMirrorMode" | "poseMode" | "start">,typeof ZapparThree.Camera>;
       imageAnchorGroup: ReactThreeFiber.Object3DNode<Omit<ZapparThree.ImageAnchorGroup, "imageTracker">,typeof ZapparThree.ImageAnchorGroup>;
       faceAnchorGroup: ReactThreeFiber.Object3DNode<Omit<ZapparThree.FaceAnchorGroup, "faceTracker">,typeof ZapparThree.FaceAnchorGroup>;
       instantWorldAnchorGroup: ReactThreeFiber.Object3DNode<Omit<ZapparThree.InstantWorldAnchorGroup, "instantTracker">,typeof ZapparThree.InstantWorldAnchorGroup>;
       faceBufferGeometry: ReactThreeFiber.Object3DNode<ZapparThree.FaceBufferGeometry,typeof ZapparThree.FaceBufferGeometry>;
       faceLandmarkGroup: ReactThreeFiber.Object3DNode<ZapparThree.FaceLandmarkGroup,typeof ZapparThree.FaceLandmarkGroup>;
       headMaskMesh: ReactThreeFiber.Object3DNode<THREE.Mesh, typeof THREE.Mesh>;
+      targetImagePreviewMesh: ReactThreeFiber.Object3DNode<THREE.Mesh, typeof THREE.Mesh>;
       // cameraTexture: ReactThreeFiber.Object3DNode<ZapparThreeCameraTexture, typeof ZapparThreeCameraTexture>;
       // cameraEnvironmentMap: ReactThreeFiber.Object3DNode<ZapparThree.CameraEnvironmentMap, typeof ZapparThree.CameraEnvironmentMap>;
 
@@ -160,6 +163,10 @@ export namespace Props {
      * */
     environmentMap?: boolean,
 
+    /**
+     * Should the camera be automatically started?.
+    */
+    start?: boolean,
     /** Props that are passed into the camera's background image. */
     backgroundImageProps?: Partial<THREE.Texture>
   };
@@ -296,6 +303,16 @@ export namespace Props {
     animations?: any;
   };
 
+
+  export type TargetImagePreviewMesh = JSX.IntrinsicElements["targetImagePreviewMesh"] & {
+    // TODO: Grab this form Zustand
+    /** Provide a reference to the FaceAnchorGroup component. */
+    imageTarget: ImageTarget
+
+    /** @ignore */
+    animations?: any;
+  };
+
   export type headMaskMesh = JSX.IntrinsicElements["headMaskMesh"] & {
     // TODO: Grab this form Zustand
     /** Provide a reference to the FaceAnchorGroup component. */
@@ -393,5 +410,7 @@ export namespace Types {
   export type FaceMesh = ZapparThree.FaceMesh
   export type HeadMaskMesh = ZapparThree.HeadMaskMesh
   export type FaceLandmark = ZapparThree.FaceLandmark
+  export type TargetImagePreviewMesh = ZapparThree.TargetImagePreviewMesh
+  export type ImageTrackingTarget = ImageTarget;
   // export type CameraEnvironmentMap = ZapparThree.CameraEnvironmentMap;
 }

@@ -58,6 +58,7 @@
     "@zappar/jest-console-logs": "1.0.4",
     "@zappar/mobile-only": "0.0.2",
     "css-loader": "6.6.0",
+    "dynamic-time-warping-ts": "1.0.0",
     "eslint": "8.8.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-prettier": "8.3.0",
@@ -98,7 +99,7 @@
   },
   "dependencies": {
     "@juggle/resize-observer": "3.3.1",
-    "@zappar/zappar-threejs": "0.3.43",
+    "@zappar/zappar-threejs": "2.0.0",
     "react-merge-refs": "1.1.0",
     "zustand": "3.6.9"
   }

@@ -8,7 +8,7 @@ import { FaceTracker, ZapparCamera, ZapparCanvas, BrowserCompatibility, LogLevel
 
 setLogLevel(LogLevel.LOG_LEVEL_VERBOSE);
 
-const App = () => {
+function App() {
   const imgSrc = require("file-loader!../../assets/sources/face.png").default;
   const [loading, setLoading] = useState(true);
 
@@ -37,5 +37,5 @@ const App = () => {
       </ZapparCanvas>
     </>
   );
-};
+}
 render(<App />, document.getElementById("root"));
