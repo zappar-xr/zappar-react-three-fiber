@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.0] - 2022-08-24
+
+## Changed
+
+- Updated to react 18
+
 ## [2.0.0] - 2022-08-23
 
 ### Added

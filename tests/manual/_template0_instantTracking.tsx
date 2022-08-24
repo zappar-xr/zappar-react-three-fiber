@@ -1,4 +1,4 @@
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import React from "react";
 import { ZapparCamera, InstantTracker, ZapparCanvas } from "../../src/index";
 
@@ -17,4 +17,8 @@ export default function App() {
   );
 }
 
-render(<App />, document.getElementById("root"));
+const container = document.getElementById("root");
+// @ts-ignore
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App />);
+

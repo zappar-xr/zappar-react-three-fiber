@@ -2,7 +2,7 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-webpack-loader-syntax */
 import React, { Suspense, useMemo, useRef, useState } from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import * as ZapparThree from "@zappar/zappar-threejs";
 import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
@@ -75,4 +75,8 @@ function Experience() {
     </div>
   );
 }
-render(<App />, document.getElementById("root"));
+const container = document.getElementById("root");
+// @ts-ignore
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App />);
+

@@ -4,12 +4,45 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-unresolved */
 import React, { useEffect, useRef, useState } from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import * as ZapparThree from "@zappar/zappar-threejs";
 import * as THREE from "three";
 import DynamicTimeWarping from "dynamic-time-warping-ts";
 import { useFrame } from "@react-three/fiber";
 import { ZapparCamera, ZapparCanvas, LogLevel, setLogLevel, InstantTracker } from "../../../src/index";
+
+const useEffectOnce = (effect: () => void | (() => void)) => {
+  const destroyFunc = useRef<void | (() => void)>();
+  const effectCalled = useRef(false);
+  const renderAfterCalled = useRef(false);
+  const [val, setVal] = useState<number>(0);
+
+  if (effectCalled.current) {
+    renderAfterCalled.current = true;
+  }
+
+  useEffect(() => {
+    // only execute the effect first time around
+    if (!effectCalled.current) {
+      destroyFunc.current = effect();
+      effectCalled.current = true;
+    }
+
+    // this forces one render after the effect is run
+    setVal((val) => val + 1);
+
+    return () => {
+      // if the comp didn't render since the useEffect was called,
+      // we know it's the dummy React cycle
+      if (!renderAfterCalled.current) {
+        return;
+      }
+      if (destroyFunc.current) {
+        destroyFunc.current();
+      }
+    };
+  }, []);
+};
 
 setLogLevel(LogLevel.LOG_LEVEL_VERBOSE);
 
@@ -58,19 +91,21 @@ const expectedPositions = [
 
 function ZapparCameraExt(props: { onReady: () => void; onSample: () => void; onFinish: () => void }) {
   const { onReady, onSample, onFinish } = props;
-  const [frameN, setFrameN] = useState(-1);
-  const [finished, setFinished] = useState(false);
-  const cameraRef = useRef<ZapparThree.Camera>(null);
-  useEffect(() => {
-    if (!cameraRef.current) return;
 
-    const sequenceSource = new ZapparThree.SequenceSource(cameraRef.current.pipeline);
+  const frameN = React.useRef(-1);
+
+  const finished = React.useRef(false);
+  const cameraRef = useRef<ZapparThree.Camera>(null);
+
+  useEffectOnce(() => {
+    const sequenceSource = new ZapparThree.SequenceSource(cameraRef!.current!.pipeline);
     const sourceUrl = require("file-loader!../../assets/sources/instant-tracking.uar").default;
     fetch(sourceUrl).then(async (resp) => {
       sequenceSource.load(await resp.arrayBuffer());
       sequenceSource.start();
     });
-  }, []);
+  });
+
   let readyCalled = false;
 
   // Total number of frames in the sequence.
@@ -81,16 +116,16 @@ function ZapparCameraExt(props: { onReady: () => void; onSample: () => void; onF
 
     const frameNumber = cameraRef.current.pipeline.frameNumber();
     // Avoid sampling the same frame twice
-    if (frameN === frameNumber) return;
+    if (frameN.current === frameNumber) return;
 
     // Sample every second frame
-    if (frameNumber % 2 === 0 && !finished) {
+    if (frameNumber % 2 === 0 && !finished.current) {
       onSample();
     }
 
     // Callback onFinish when we've reached the last sequence frame.
-    if (frameNumber === sequenceNframes && !finished) {
-      setFinished(true);
+    if (frameNumber === sequenceNframes && !finished.current) {
+      finished.current = true;
       onFinish();
     }
     // Set placement mode on frame 10.
@@ -98,10 +133,10 @@ function ZapparCameraExt(props: { onReady: () => void; onSample: () => void; onF
       onReady();
       readyCalled = true;
     }
-    setFrameN(frameNumber);
+    frameN.current = frameNumber;
   });
 
-  return <ZapparCamera start={false} ref={cameraRef} permissionRequest={false} />;
+  return React.useMemo(() => <ZapparCamera start={false} ref={cameraRef} permissionRequest={false} />, []);
 }
 
 function App() {
@@ -148,4 +183,8 @@ function App() {
     </>
   );
 }
-render(<App />, document.getElementById("root"));
+
+const container = document.getElementById("root");
+// @ts-ignore
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App />);

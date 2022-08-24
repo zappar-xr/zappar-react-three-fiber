@@ -4,7 +4,6 @@
 /* eslint-disable no-unused-vars */
 import * as ZapparThree from "@zappar/zappar-threejs";
 import React from "react";
-import { CameraTexture as ZapparThreeCameraTexture } from "@zappar/zappar-threejs/lib/cameraTexture";
 
 import { ReactThreeFiber } from "@react-three/fiber";
 // eslint-disable-next-line import/no-extraneous-dependencies

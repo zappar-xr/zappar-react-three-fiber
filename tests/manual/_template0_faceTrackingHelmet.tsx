@@ -2,7 +2,7 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-unresolved */
 import React, { Suspense, useMemo, useRef, useState } from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 import { FaceTracker, HeadMaskMesh, ZapparCamera, ZapparCanvas, Loader } from "../../src/index";
@@ -65,4 +65,8 @@ export default function App() {
     </>
   );
 }
-render(<App />, document.getElementById("root"));
+const container = document.getElementById("root");
+// @ts-ignore
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App />);
+

@@ -44,11 +44,12 @@ const ZapparInstantTracker = forwardRef((props: Props.InstantWorldAnchorGroup, r
   useFrame(() => {
     if (_placementMode && instantWorldTracker) {
       if (Array.isArray(placementOffset)) {
-        instantWorldTracker.setAnchorPoseFromCameraOffset(...placementOffset);
+        instantWorldTracker.setAnchorPoseFromCameraOffset(placementOffset[0], placementOffset[1], placementOffset[2]);
       } else if (typeof placementOffset === "number") {
         instantWorldTracker.setAnchorPoseFromCameraOffset(0, 0, placementOffset);
-      } else if (placementOffset.x) {
-        instantWorldTracker.setAnchorPoseFromCameraOffset(placementOffset.x, placementOffset.y, placementOffset.z);
+      } else if ((placementOffset as any).x !== undefined) {
+        // Older versions of r3f
+        instantWorldTracker.setAnchorPoseFromCameraOffset((placementOffset as any).x, (placementOffset as any).y, (placementOffset as any).z);
       }
     }
   });

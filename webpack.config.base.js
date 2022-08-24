@@ -10,6 +10,9 @@ module.exports = {
     libraryTarget: "umd",
   },
   resolve: {
+    alias: {
+      "three": path.resolve(__dirname, "node_modules/three"),
+    },
     // Add `.ts` and `.tsx` as a resolvable extension.
     extensions: [".ts", ".tsx", ".js", ".wasm"],
   },

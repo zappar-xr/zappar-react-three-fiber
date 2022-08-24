@@ -3,7 +3,7 @@
 /* eslint-disable import/no-unresolved */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { ZapparCamera, ZapparCanvas } from "../../src/index";
 
 function App() {
@@ -19,4 +19,7 @@ function App() {
     </ZapparCanvas>
   );
 }
-render(<App />, document.getElementById("root"));
+const container = document.getElementById("root");
+// @ts-ignore
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App />);

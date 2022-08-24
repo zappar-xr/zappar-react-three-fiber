@@ -2,7 +2,7 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 import React, { Suspense, useEffect, useRef, useState } from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import * as ZapparThree from "@zappar/zappar-threejs";
@@ -156,4 +156,8 @@ export default function App() {
     </>
   );
 }
-render(<App />, document.getElementById("root"));
+const container = document.getElementById("root");
+// @ts-ignore
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App />);
+

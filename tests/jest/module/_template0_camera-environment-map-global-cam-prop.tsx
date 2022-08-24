@@ -3,7 +3,7 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-unresolved */
 import React, { useMemo, useState } from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { ZapparCamera, ZapparCanvas, BrowserCompatibility, LogLevel, setLogLevel } from "../../../src/index";
 
 setLogLevel(LogLevel.LOG_LEVEL_VERBOSE);
@@ -41,4 +41,8 @@ function App() {
     </>
   );
 }
-render(<App />, document.getElementById("root"));
+
+const container = document.getElementById("root");
+// @ts-ignore
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App />);

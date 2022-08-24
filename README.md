@@ -63,7 +63,7 @@ You may also be interested in:
       * [Integrating into an existing create-react-app project](#integrating-into-an-existing-create-react-app-project)
       * [Links and Resources](#links-and-resources)
 
-<!-- Added by: zapparadmin, at: Tue Aug 23 14:26:17 BST 2022 -->
+<!-- Added by: zapparadmin, at: Wed Aug 24 12:56:04 BST 2022 -->
 
 <!--te-->
 
@@ -134,7 +134,7 @@ Please note - This library supports Webpack 5 and later.
 You can integrate the Zappar library with an existing React Three Fiber app. A typical project may look like this:
 
 ```tsx
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import React from "react";
 import {
   ZapparCamera,
@@ -163,7 +163,11 @@ const App = () => {
     </ZapparCanvas>
   );
 }
-render(<App />, document.getElementById("root"));
+const container = document.getElementById("root");
+// @ts-ignore
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App />);
+
 ```
 
 The remainder of this document goes into more detail about each of the component elements of the example above.

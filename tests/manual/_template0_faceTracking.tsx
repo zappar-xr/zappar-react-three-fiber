@@ -2,7 +2,7 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-unresolved */
 import React, { Suspense, useRef } from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { useLoader } from "@react-three/fiber";
 import { TextureLoader } from "three";
 import { FaceBufferGeometry, FaceTracker, ZapparCamera, ZapparCanvas, BrowserCompatibility, Types } from "../../src/index";
@@ -46,4 +46,8 @@ const App = () => {
     </>
   );
 };
-render(<App />, document.getElementById("root"));
+const container = document.getElementById("root");
+// @ts-ignore
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App />);
+
