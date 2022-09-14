@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.1] - 2022-09-14
+
+## Changed
+
+- `ZapparCamera` component's `useFrame` priority from `2` to `-1`.
+- Wrapped `ZapparCamera` inside of a `<primitive>` component.
+- Updated dependencies.
+
 ## [2.1.0] - 2022-08-24
 
 ## Changed

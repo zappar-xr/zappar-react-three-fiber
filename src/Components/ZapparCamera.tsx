@@ -3,16 +3,9 @@ import * as ZapparThree from "@zappar/zappar-threejs";
 import React, { forwardRef, useEffect, useMemo, useState } from "react";
 import { CameraTexture } from "@zappar/zappar-threejs/lib/cameraTexture";
 import mergeRefs from "react-merge-refs";
-import { extend, useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Props } from "../spec";
 import useStore from "../store";
-
-class ZapparCameraAdditional extends ZapparThree.Camera {
-  updateProjectionMatrix = () => {};
-}
-// First frame rendered R3f tries to update the projection matrix of the default camera.
-// Zappar camera does not have this method, so we create a noop
-extend({ ZapparCameraAdditional });
 
 /**
  * Creates a camera that you can use instead of a perspective camera.
@@ -29,7 +22,7 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
     pipeline,
     sources,
     makeDefault = true,
-    renderPriority = 2,
+    renderPriority = -1,
     environmentMap = false,
     permissionRequest = true,
     onFirstFrame,
@@ -50,7 +43,7 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
     if (backgroundImageProps && cameraTexture) Object.assign(cameraTexture, backgroundImageProps);
   }, [backgroundImageProps, cameraTexture]);
 
-  const cameraRef = React.useRef<ZapparCameraAdditional>();
+  const cameraRef = React.useRef<ZapparThree.Camera>();
 
   const [permissionGranted, setPermissionGranted] = useState<boolean>(false);
 
@@ -63,9 +56,6 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
     const activePipeline = pipeline || ZapparThree;
     activePipeline.glContextSet(gl.getContext());
   }, [pipeline, gl]);
-
-  // TODO: If not making default, scene's texture should not be changed, and camera should not tick.
-  // TODO: Instead, it should be exposed to user to set when needed.
 
   useEffect(() => {
     if (makeDefault) {
@@ -140,19 +130,28 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
 
     cameraRef.current.updateFrame(gl);
 
-    gl.render(scene, cameraRef.current);
+    if (renderPriority > 0) {
+      gl.render(scene, cameraRef.current);
+    }
   }, renderPriority);
+
+  const camera = React.useMemo(() => {
+    const cam = new ZapparThree.Camera({
+      pipeline,
+      userCameraSource: sources?.userCamera,
+      rearCameraSource: sources?.rearCamera,
+      backgroundTexture: cameraTexture,
+    });
+    // Noop for resize.
+    (cam as any).updateProjectionMatrix = () => {};
+    return cam;
+  }, [pipeline, sources, cameraTexture]);
 
   return (
     <>
       <primitive dispose={null} object={cameraTexture} attach="background" />
       {environmentMap && <primitive dispose={null} object={cameraEnvMap!.environmentMap} attach="environment" />}
-      <zapparCameraAdditional
-        dispose={null}
-        args={[{ pipeline, userCameraSource: sources?.userCamera, rearCameraSource: sources?.rearCamera, backgroundTexture: cameraTexture }]}
-        ref={mergeRefs([cameraRef, ref])}
-        {...props}
-      />
+      <primitive dispose={null} object={camera} ref={mergeRefs([ref, cameraRef])} />
     </>
   );
 });
