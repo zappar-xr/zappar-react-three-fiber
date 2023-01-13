@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.3] - 2023-01-13
+
+## Fixed
+
+- Children props are once again passed into `ZapparCamera`.
+
 ## [2.1.2] - 2022-11-14
 
 ## Changed

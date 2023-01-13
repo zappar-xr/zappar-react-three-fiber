@@ -151,7 +151,9 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
     <>
       <primitive dispose={null} object={cameraTexture} attach="background" />
       {environmentMap && <primitive dispose={null} object={cameraEnvMap!.environmentMap} attach="environment" />}
-      <primitive dispose={null} object={camera} ref={mergeRefs([ref, cameraRef])} />
+      <primitive dispose={null} object={camera} ref={mergeRefs([ref, cameraRef])}>
+        {props.children}
+      </primitive>
     </>
   );
 });
