@@ -3,7 +3,7 @@ import VERSION from "./version";
 // eslint-disable-next-line no-console
 console.log(`Zappar for React Three v${VERSION}`);
 
-export { browserIncompatible, Pipeline, LogLevel, setLogLevel, SequenceSource } from "@zappar/zappar-threejs";
+export { browserIncompatible, Pipeline, LogLevel, setLogLevel, SequenceSource, cookiesPermitted } from "@zappar/zappar-threejs";
 export { Types } from "./spec";
 export { default as FaceBufferGeometry } from "./Components/FaceBufferGeometry";
 export { default as FaceLandmark } from "./Components/trackers/FaceLandmarkGroup";

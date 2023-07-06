@@ -1,5 +1,5 @@
 /**
  * SDK version.
  */
-const VERSION = "2.1.3";
+const VERSION = "2.4.3";
 export default VERSION;

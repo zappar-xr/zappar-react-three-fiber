@@ -1,5 +1,40 @@
 # Changelog
 
+## [2.2.1 - 2.4.1] - 2023-06-23
+
+### Changed
+
+- `TargetImagePreviewMesh` returns `sRGB` material by default.
+- Fixed an issue with washed out camera feed r152+
+
+### Fixed
+
+- Fixed a curved image tracking performance issue.
+
+## [2.2.1] - 2023-03-27
+
+### Fixed
+
+- Fixed degenerate case for `ImageTargetPreview`.
+- Fixed an issue where the wrong camera would be used in `iOS 16.4`.
+
+## [2.3.0-beta.1] - 2023-02-08
+
+### Added
+
+- Spanish, Portuguese and German translations for permissions screen
+
+### Changed
+
+- Improvements to curved tracking
+
+## [2.2.0] - 2023-02-03
+
+## Changed
+
+- Updated dependencies.
+- Module is now built as `ESNext`.
+
 ## [2.1.3] - 2023-01-13
 
 ## Fixed

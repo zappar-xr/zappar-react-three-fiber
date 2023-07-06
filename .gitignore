@@ -2,7 +2,6 @@ out
 node_modules
 dist
 example-dist
-.npmrc
 test-dist
 umd
 lib
