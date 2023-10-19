@@ -33,8 +33,26 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
   const { gl, set } = useThree((state) => state);
 
   const hadFirstFrame = React.useRef(false);
+  const [cameraInitialized, setCameraInitialized] = useState(false);
 
   const [cameraTexture] = useState(new CameraTexture());
+
+  const cameraRef = React.useRef<ZapparThree.Camera>();
+
+  const camera = React.useMemo(() => {
+    const cam = new ZapparThree.Camera({
+      pipeline,
+      userCameraSource: sources?.userCamera,
+      rearCameraSource: sources?.rearCamera,
+      backgroundTexture: cameraTexture,
+    });
+    // Noop for resize.
+    (cam as any).updateProjectionMatrix = () => {};
+    cameraRef.current = cam;
+    setCameraInitialized(true);
+    return cam;
+  }, [pipeline, sources, cameraTexture]);
+
   const cameraEnvMap = useMemo(() => {
     return environmentMap ? new ZapparThree.CameraEnvironmentMap() : undefined;
   }, [environmentMap]);
@@ -42,8 +60,6 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
   useEffect(() => {
     if (backgroundImageProps && cameraTexture) Object.assign(cameraTexture, backgroundImageProps);
   }, [backgroundImageProps, cameraTexture]);
-
-  const cameraRef = React.useRef<ZapparThree.Camera>();
 
   const [permissionGranted, setPermissionGranted] = useState<boolean>(false);
 
@@ -64,19 +80,19 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
   }, [makeDefault]);
 
   useEffect(() => {
-    if (!cameraRef.current) return;
-    store.camera.set(cameraRef.current);
+    if (!camera || !cameraInitialized) return;
+    store.camera.set(camera);
     if (!start) return;
     if (permissionGranted || !permissionRequest) {
-      cameraRef.current!.start(userFacing);
+      camera.start(userFacing);
     } else {
       ZapparThree.permissionRequestUI().then((granted) => {
         setPermissionGranted(granted);
-        if (granted) cameraRef.current!.start(userFacing);
+        if (granted) camera.start(userFacing);
         else ZapparThree.permissionDeniedUI();
       });
     }
-  }, [userFacing, permissionRequest, start]);
+  }, [userFacing, permissionRequest, start, cameraInitialized]);
 
   useEffect(() => {
     if (!cameraRef.current) return;
@@ -134,18 +150,6 @@ const ZapparCamera = forwardRef((props: Props.Camera, ref) => {
       gl.render(scene, cameraRef.current);
     }
   }, renderPriority);
-
-  const camera = React.useMemo(() => {
-    const cam = new ZapparThree.Camera({
-      pipeline,
-      userCameraSource: sources?.userCamera,
-      rearCameraSource: sources?.rearCamera,
-      backgroundTexture: cameraTexture,
-    });
-    // Noop for resize.
-    (cam as any).updateProjectionMatrix = () => {};
-    return cam;
-  }, [pipeline, sources, cameraTexture]);
 
   return (
     <>

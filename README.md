@@ -22,48 +22,9 @@ You may also be interested in:
 <summary>Click to expand table of contents</summary>
 
 <!--ts-->
-   * [Zappar for React Three Fiber](#zappar-for-react-three-fiber)
-      * [Table Of Contents](#table-of-contents)
-      * [Getting Started](#getting-started)
-         * [Bootstrap Projects](#bootstrap-projects)
-            * [GitHub](#github)
-            * [create-react-app](#create-react-app)
-         * [Example Projects](#example-projects)
-      * [Starting Development](#starting-development)
-         * [NPM](#npm)
-      * [Overview](#overview)
-      * [Local Preview and Testing](#local-preview-and-testing)
-      * [Compatibility and Browser Support](#compatibility-and-browser-support)
-         * [Detecting Browser Compatibility](#detecting-browser-compatibility)
-      * [Publishing and Hosting Content](#publishing-and-hosting-content)
-         * [Licensing](#licensing)
-      * [Setting up the Canvas](#setting-up-the-canvas)
-      * [Setting up the Camera](#setting-up-the-camera)
-      * [Advanced Usage](#advanced-usage)
-         * [Custom Video Device](#custom-video-device)
-         * [First Frame](#first-frame)
-         * [Setting the default camera](#setting-the-default-camera)
-         * [User Facing Camera](#user-facing-camera)
-         * [Mirroring the Camera](#mirroring-the-camera)
-         * [Realtime Camera-based Reflections](#realtime-camera-based-reflections)
-         * [Camera Pose](#camera-pose)
-      * [Tracking](#tracking)
-         * [Image Tracking](#image-tracking)
-            * [Target File](#target-file)
-            * [Events](#events)
-         * [Face Tracking](#face-tracking)
-            * [Events](#events-1)
-         * [Face Landmarks](#face-landmarks)
-         * [Face Mesh](#face-mesh)
-         * [Head Masking](#head-masking)
-         * [Instant World Tracking](#instant-world-tracking)
-            * [Default Placement UI](#default-placement-ui)
-      * [Loading UI](#loading-ui)
-      * [Usage with react-router-dom](#usage-with-react-router-dom)
-      * [Integrating into an existing create-react-app project](#integrating-into-an-existing-create-react-app-project)
-      * [Links and Resources](#links-and-resources)
 
-<!-- Added by: zapparadmin, at: Thu Jul  6 13:00:26 BST 2023 -->
+
+<!-- Added by: zapparadmin, at: Thu 19 Oct 2023 12:53:28 BST -->
 
 <!--te-->
 
